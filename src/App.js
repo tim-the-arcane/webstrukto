@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { v4 as uuid } from "uuid";
+import arrayMove from "array-move";
 
 import Symbols from "./components/Symbols";
 
@@ -49,8 +50,30 @@ class App extends Component {
     });
   };
 
+  moveSymbol = (
+    symbolId,
+    to
+  ) => {
+
+    const from = this.state.symbols.findIndex((symbol) => symbol.id === symbolId);
+
+    switch(to){
+      case "UP":
+        to = from-1;
+        break;
+      case "DOWN":
+        to = from+1;
+        break;
+      default:
+        // 
+    }
+
+    this.setState({
+      symbols: arrayMove(this.state.symbols, from, to),
+    });
+  };
+
   removeSymbol = (symbolId) => {
-    console.log(symbolId);
     this.setState({
       symbols: this.state.symbols.filter((symbol) => symbol.id !== symbolId),
     });
@@ -62,6 +85,7 @@ class App extends Component {
         <Symbols
           symbols={this.state.symbols}
           editSymbol={this.editSymbol}
+          moveSymbol={this.moveSymbol}
           removeSymbol={this.removeSymbol}
         />
         <div className="container">

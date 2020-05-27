@@ -11,6 +11,7 @@ export class Symbols extends Component {
   }
   
   editSymbol = this.props.editSymbol;
+  moveSymbol = this.props.moveSymbol;
   removeSymbol = this.props.removeSymbol;
 
   componentDidUpdate(prevProps) {
@@ -29,8 +30,9 @@ export class Symbols extends Component {
             id={symbol.id}
             key={symbol.id}
             title={symbol.title}
-            type={symbol.type}
+            type={symbol.type || "Process"} // Default to "Process"
             editSymbol={this.editSymbol}
+            moveSymbol={this.props.moveSymbol}
             removeSymbol={this.removeSymbol}
           />
         ))}
