@@ -1,2 +1,2 @@
-@import url("https://classless.de/classless.css");@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap");.Symbol{border-top:1px solid black}.Symbol__header{padding:0.5em}.Symbols{width:calc(100% - 20px);max-width:500px;margin:0 auto;border:1px solid black;border-top:0;font-size:20px}
+@import url("https://classless.de/classless.css");@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap");.Symbol{border-top:1px solid black}.Symbol__header{padding:0.5em}.Symbols{border:1px solid black;border-top:0;font-size:20px}.container{width:calc(100% - 20px);max-width:500px;margin:0 auto}
 /*# sourceMappingURL=main.min.css.map */
