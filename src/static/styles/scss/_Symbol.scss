@@ -3,5 +3,26 @@
 }
 
 .Symbol__header {
-    padding: 0.5em;
+  padding: 0.5em;
+  position: relative;
+}
+
+.Symbol__buttons {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.Symbol:hover .Symbol__buttons {
+  display: flex;
+}
+
+.Symbol__button {
+  font-size: 0.5em;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: 1px whitesmoke solid;
 }

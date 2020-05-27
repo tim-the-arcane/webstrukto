@@ -37,10 +37,17 @@ class App extends Component {
     });
   };
 
+  removeSymbol = (symbolId) => {
+    console.log(symbolId);
+    this.setState({
+      symbols: this.state.symbols.filter((symbol) => symbol.id !== symbolId),
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <Symbols symbols={this.state.symbols} />
+        <Symbols symbols={this.state.symbols} removeSymbol={this.removeSymbol} />
         <div className="container">
           <div className="card">
             <button

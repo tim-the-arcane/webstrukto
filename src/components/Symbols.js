@@ -10,6 +10,8 @@ export class Symbols extends Component {
     };
   }
 
+  removeSymbol = this.props.removeSymbol;
+
   componentDidUpdate(prevProps) {
     if (this.props.symbols !== prevProps.symbols) {
       this.setState({
@@ -22,7 +24,13 @@ export class Symbols extends Component {
     return (
       <div className="Symbols container">
         {this.state.symbols.map((symbol) => (
-          <Symbol key={symbol.id} title={symbol.title} type={symbol.title} />
+          <Symbol
+            id={symbol.id}
+            key={symbol.id}
+            title={symbol.title}
+            type={symbol.title}
+            removeSymbol={this.removeSymbol}
+          />
         ))}
       </div>
     );
