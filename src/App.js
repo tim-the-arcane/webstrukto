@@ -1,10 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
+import Symbols from "./components/Symbols";
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Symbols/>
+      </div>
+    );
+  }
 }
 
 export default App;
