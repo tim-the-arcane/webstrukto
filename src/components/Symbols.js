@@ -10,6 +10,7 @@ export class Symbols extends Component {
     };
   }
   
+  editSymbol = this.props.editSymbol;
   removeSymbol = this.props.removeSymbol;
 
   componentDidUpdate(prevProps) {
@@ -29,6 +30,7 @@ export class Symbols extends Component {
             key={symbol.id}
             title={symbol.title}
             type={symbol.type}
+            editSymbol={this.editSymbol}
             removeSymbol={this.removeSymbol}
           />
         ))}

@@ -37,6 +37,18 @@ class App extends Component {
     });
   };
 
+  editSymbol = (symbolId, editedSymbol) => {
+    this.setState({
+      symbols: this.state.symbols.map((symbol) => {
+        if (symbol.id === symbolId) {
+          return editedSymbol;
+        }
+
+        return symbol;
+      }),
+    });
+  };
+
   removeSymbol = (symbolId) => {
     console.log(symbolId);
     this.setState({
@@ -47,7 +59,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Symbols symbols={this.state.symbols} removeSymbol={this.removeSymbol} />
+        <Symbols
+          symbols={this.state.symbols}
+          editSymbol={this.editSymbol}
+          removeSymbol={this.removeSymbol}
+        />
         <div className="container">
           <div className="card">
             <button
