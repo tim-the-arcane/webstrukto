@@ -1,23 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const SymbolForm = ({ symbol, submitLabel, submitHandler }) => {
-  const state = {
-    title: symbol.title,
-    type: symbol.type
-  }
+  const [title, setTitle] = useState(symbol.title);
+  const [type, setType] = useState(symbol.type || "Process");
+  const [id, setId] = useState(symbol.id);
 
-  const [title, setTitle] = useState(state.title);
-  const [type, setType] = useState(state.type);
+  useEffect(() => {
+    setTitle(symbol.title);
+    setType(symbol.type);
+    setId(symbol.id);
+  }, [symbol]);
 
   return (
-    <form onReset={(e) => {
-      e.preventDefault();
-      setTitle(state.title);
-      setType(state.type);
-    }} onSubmit={(e) => {
-      e.preventDefault();
-      submitHandler({title: title, type: type});
-    }}>
+    <form
+      onReset={(e) => {
+        e.preventDefault();
+        setTitle(symbol.title);
+        setType(symbol.type);
+      }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        submitHandler({ id: id, title: title, type: type });
+      }}
+    >
       <label htmlFor="title">Titel</label>
       <input
         id="title"

@@ -24,13 +24,7 @@ const SymbolButtons = ({ symbol, editSymbol, moveSymbol, removeSymbol }) => {
       </button>
       <button
         className="Symbol__button Symbol__button--edit"
-        onClick={() =>
-          editSymbol(symbol.id, {
-            id: symbol.id,
-            title: "neuer Titel",
-            type: symbol.type,
-          })
-        }
+        onClick={() => editSymbol(symbol)}
       >
         <span role="img" aria-label={`remove Symbol titled '${symbol.title}'`}>
           🖋️
