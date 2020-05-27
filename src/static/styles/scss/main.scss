@@ -26,3 +26,24 @@ body {
   max-width: 500px;
   margin: 0 auto;
 }
+
+.SymbolForm {
+  display: flex;
+  flex-direction: column;
+
+  input,
+  select {
+    margin-top: 0.25em;
+    margin-bottom: 1em;
+  }
+}
+
+.SymbolForm__buttons {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+
+  button {
+    width: calc(50% - 0.5em);
+  }
+}

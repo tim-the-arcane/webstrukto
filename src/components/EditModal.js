@@ -16,7 +16,7 @@ const EditModal = ({ active, symbol, editSymbol }) => {
   return (
     <SymbolForm
       symbol={symbolToEdit}
-      submitLabel={"Aktualisieren"}
+      submitLabel={"Übernehmen"}
       submitHandler={editSymbol}
     />
   );

@@ -4,6 +4,7 @@ const SymbolForm = ({ symbol, submitLabel, submitHandler }) => {
   const [title, setTitle] = useState(symbol.title);
   const [type, setType] = useState(symbol.type || "Process");
   const [id, setId] = useState(symbol.id);
+  const [changes, setChanges] = useState(false);
 
   useEffect(() => {
     setTitle(symbol.title);
@@ -13,10 +14,12 @@ const SymbolForm = ({ symbol, submitLabel, submitHandler }) => {
 
   return (
     <form
+      className="SymbolForm"
       onReset={(e) => {
         e.preventDefault();
         setTitle(symbol.title);
         setType(symbol.type);
+        setChanges(false);
       }}
       onSubmit={(e) => {
         e.preventDefault();
@@ -28,16 +31,30 @@ const SymbolForm = ({ symbol, submitLabel, submitHandler }) => {
         id="title"
         type="text"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          setChanges(true);
+        }}
       />
       <label htmlFor="type">Typ</label>
-      <select id="type" value={type} onChange={(e) => setType(e.target.value)}>
+      <select
+        id="type"
+        value={type}
+        onChange={(e) => {
+          setType(e.target.value);
+          setChanges(true);
+        }}
+      >
         <option value="Process">Prozess</option>
         <option value="TestFirstLoop">Kopfgesteuerte Schleife</option>
         <option value="TestLastLoop">Fußgesteuerte Schleife</option>
       </select>
-      <button type="submit">{submitLabel}</button>
-      <button type="reset">Reset</button>
+      <div className="SymbolForm__buttons">
+        <button type="submit">{submitLabel}</button>
+        <button disabled={!changes} type="reset">
+          Reset
+        </button>
+      </div>
     </form>
   );
 };
