@@ -1,6 +1,15 @@
 :root {
-  font-size: 20px;
+  font-size: 16px;
   font-family: sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /** Import BEM Blocks **/
@@ -9,6 +18,7 @@
 .Symbols {
   border: 1px solid black;
   border-top: 0;
+  box-shadow: 0 0.25em 0.5em -0.125em rgba(0, 0, 0, 0.4);
 }
 
 .container {
