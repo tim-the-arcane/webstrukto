@@ -10,7 +10,7 @@ const Symbol = ({ id, title, type, removeSymbol }) => {
             className="Symbol__button Symbol__button--delete"
             onClick={() => removeSymbol(id)}
           >
-            🗑️
+            <span role="img" aria-label={`remove Symbol titled '${title}'`}>🗑️</span>
           </button>
         </div>
       </div>
