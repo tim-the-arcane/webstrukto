@@ -1,18 +1,16 @@
 import React from "react";
-import SymbolButtons from "./SymbolButtons";
+import SymbolButtons from "./_SymbolButtons";
 
-const Symbol = ({ id, title, type, editSymbol, moveSymbol, removeSymbol }) => {
+const Symbol = ({ symbol, editSymbol, moveSymbol, removeSymbol }) => {
   return (
-    <div className={"Symbol Symbol--" + type}>
+    <div className={"Symbol Symbol--" + ( symbol.type || "Process")}>
       <div className="Symbol__header">
-        <span className="Symbol__title">{title}</span>
+        <span className="Symbol__title">{symbol.title}</span>
         <SymbolButtons
           editSymbol={editSymbol}
           moveSymbol={moveSymbol}
           removeSymbol={removeSymbol}
-          id={id}
-          title={title}
-          type={type}
+          symbol={symbol}
         />
       </div>
     </div>

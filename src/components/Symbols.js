@@ -27,10 +27,7 @@ export class Symbols extends Component {
       <div className="Symbols container">
         {this.state.symbols.map((symbol) => (
           <Symbol
-            id={symbol.id}
-            key={symbol.id}
-            title={symbol.title}
-            type={symbol.type || "Process"} // Default to "Process"
+            symbol={symbol}
             editSymbol={this.editSymbol}
             moveSymbol={this.props.moveSymbol}
             removeSymbol={this.removeSymbol}
