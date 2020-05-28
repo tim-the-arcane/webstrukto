@@ -23,6 +23,15 @@ export class Symbols extends Component {
   }
 
   render() {
+    // Render placeholder instead of Symbols when list empty
+    if (this.props.symbols.length === 0) {
+      return (
+        <div className="Symbols Symbols--empty">
+          <p>Füge ein Symbol hinzu, um anzufangen...</p>
+        </div>
+      );
+    }
+
     return (
       <div className="Symbols">
         {this.state.symbols.map(symbol => (
@@ -30,7 +39,7 @@ export class Symbols extends Component {
             key={symbol.id}
             symbol={symbol}
             editSymbol={this.editSymbol}
-            moveSymbol={this.props.moveSymbol}
+            moveSymbol={this.moveSymbol}
             removeSymbol={this.removeSymbol}
           />
         ))}
