@@ -37,7 +37,7 @@ class App extends Component {
     },
   };
 
-  addSymbol = (symbol) => {
+  addSymbol = symbol => {
     this.setState({
       symbols: [
         ...this.state.symbols,
@@ -49,20 +49,20 @@ class App extends Component {
     });
   };
 
-  updateSymbol = (editedSymbol) => {
+  updateSymbol = editedSymbol => {
     this.setState({
-      symbols: this.state.symbols.map((symbol) => {
+      symbols: this.state.symbols.map(symbol => {
         if (symbol.id === editedSymbol.id) {
           return editedSymbol;
         }
 
         return symbol;
       }),
-      toggleEditModal: false
+      toggleEditModal: false,
     });
   };
 
-  editSymbol = (symbol) => {
+  editSymbol = symbol => {
     this.setState({
       symbolToEdit: symbol,
       toggleEditModal: true,
@@ -70,9 +70,7 @@ class App extends Component {
   };
 
   moveSymbol = (symbolId, to) => {
-    const from = this.state.symbols.findIndex(
-      (symbol) => symbol.id === symbolId
-    );
+    const from = this.state.symbols.findIndex(symbol => symbol.id === symbolId);
 
     switch (to) {
       case "UP":
@@ -90,18 +88,29 @@ class App extends Component {
     });
   };
 
-  removeSymbol = (symbolId) => {
+  removeSymbol = symbolId => {
     this.setState({
-      symbols: this.state.symbols.filter((symbol) => symbol.id !== symbolId),
+      symbols: this.state.symbols.filter(symbol => symbol.id !== symbolId),
     });
   };
 
   render() {
     return (
       <div className="App">
-        <div className="container">
-          <h1>webstrukto</h1>
-        </div>
+        <header>
+          <div className="container">
+            <h1 className="logo">
+              webstrukto <br />
+              <span
+                style={{
+                  fontSize: "0.5em",
+                  lineHeight: "1em",
+                }}>
+                – der Struktogramm-Editor für's Web
+              </span>
+            </h1>
+          </div>
+        </header>
         <Symbols
           symbols={this.state.symbols}
           editSymbol={this.editSymbol}

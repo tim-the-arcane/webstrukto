@@ -3,13 +3,32 @@
   font-family: sans-serif;
 }
 
-body {
+body,
+html {
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 0;
 }
 
 * {
   box-sizing: border-box;
+}
+
+header {
+  width: 100%;
+  background-color: darkslateblue;
+}
+
+.logo {
+  color: white;
+  margin-top: 0;
+  padding: 1rem 0;
+
+  span {
+    color: whitesmoke;
+  }
+
+  header {
+  }
 }
 
 /** Import BEM Blocks **/
