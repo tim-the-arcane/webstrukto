@@ -111,12 +111,14 @@ class App extends Component {
             </h1>
           </div>
         </header>
-        <Symbols
-          symbols={this.state.symbols}
-          editSymbol={this.editSymbol}
-          moveSymbol={this.moveSymbol}
-          removeSymbol={this.removeSymbol}
-        />
+        <div className="container">
+          <Symbols
+            symbols={this.state.symbols}
+            editSymbol={this.editSymbol}
+            moveSymbol={this.moveSymbol}
+            removeSymbol={this.removeSymbol}
+          />
+        </div>
         <div className="container">
           <h4>Symbol hinzufügen</h4>
           <SymbolForm

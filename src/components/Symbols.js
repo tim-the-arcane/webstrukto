@@ -9,7 +9,7 @@ export class Symbols extends Component {
       symbols: props.symbols,
     };
   }
-  
+
   editSymbol = this.props.editSymbol;
   moveSymbol = this.props.moveSymbol;
   removeSymbol = this.props.removeSymbol;
@@ -24,8 +24,8 @@ export class Symbols extends Component {
 
   render() {
     return (
-      <div className="Symbols container">
-        {this.state.symbols.map((symbol) => (
+      <div className="Symbols">
+        {this.state.symbols.map(symbol => (
           <Symbol
             key={symbol.id}
             symbol={symbol}
