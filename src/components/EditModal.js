@@ -6,19 +6,22 @@ const EditModal = ({ active, symbol, editSymbol }) => {
   const [symbolToEdit, setSymbolToEdit] = useState(symbol);
 
   useEffect(() => {
-      setSymbolToEdit(symbol)
-  }, [symbol])
-  
+    setSymbolToEdit(symbol);
+  }, [symbol]);
+
   if (!active) {
     return null;
   }
 
   return (
-    <SymbolForm
-      symbol={symbolToEdit}
-      submitLabel={"Übernehmen"}
-      submitHandler={editSymbol}
-    />
+    <div className="EditModal">
+      <h4>Symbol bearbeiten</h4>
+      <SymbolForm
+        symbol={symbolToEdit}
+        submitLabel={"Übernehmen"}
+        submitHandler={editSymbol}
+      />
+    </div>
   );
 };
 

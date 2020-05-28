@@ -131,7 +131,6 @@ class App extends Component {
           />
         </div>
         <div className="container">
-          <h4>Symbol bearbeiten</h4>
           <EditModal
             active={this.state.toggleEditModal}
             symbol={this.state.symbolToEdit}
