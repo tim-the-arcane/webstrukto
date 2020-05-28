@@ -3,10 +3,12 @@
   font-family: sans-serif;
 }
 
-body,
-html {
+body {
   margin: 0 auto;
   padding: 0;
+  background-color: whitesmoke;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 * {
@@ -19,16 +21,16 @@ header {
 }
 
 .logo {
-  color: white;
+  color: rgb(255, 255, 137);
   margin-top: 0;
   padding: 1rem 0;
+}
 
-  span {
-    color: whitesmoke;
-  }
-
-  header {
-  }
+h1,
+h2,
+h3,
+h4 {
+  font-weight: lighter;
 }
 
 /** Import BEM Blocks **/
@@ -37,7 +39,8 @@ header {
 .Symbols {
   border: 1px solid black;
   border-top: 0;
-  box-shadow: 0 0.25em 0.5em -0.125em rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0.25em 0.5em -0.125em rgba(99, 99, 99, 0.4);
+  background-color: white;
 }
 
 .container {
@@ -51,9 +54,12 @@ header {
   flex-direction: column;
 
   input,
-  select {
+  select,
+  option {
     margin-top: 0.25em;
     margin-bottom: 1em;
+    font-size: 1rem;
+    padding: 5px;
   }
 }
 
