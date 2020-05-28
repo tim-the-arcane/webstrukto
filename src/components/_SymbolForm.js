@@ -35,6 +35,8 @@ const SymbolForm = ({ symbol, submitLabel, submitHandler }) => {
           setTitle(e.target.value);
           setChanges(true);
         }}
+        placeholder="Gib den neuen Titel des Symbols ein"
+        required
       />
       <label htmlFor="type">Typ</label>
       <select
@@ -44,6 +46,7 @@ const SymbolForm = ({ symbol, submitLabel, submitHandler }) => {
           setType(e.target.value);
           setChanges(true);
         }}
+        required
       >
         <option value="Process">Prozess</option>
         <option value="TestFirstLoop">Kopfgesteuerte Schleife</option>
