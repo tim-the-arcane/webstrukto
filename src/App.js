@@ -8,6 +8,10 @@ import EditModal from "./components/EditModal";
 
 class App extends Component {
   state = {
+    symbolTemplate: {
+      title: "",
+      type: "Process",
+    },
     symbols: [
       {
         id: uuid(),
@@ -122,10 +126,7 @@ class App extends Component {
         <div className="container">
           <h4>Symbol hinzufügen</h4>
           <SymbolForm
-            symbol={{
-              title: "test titel",
-              type: "Process",
-            }}
+            symbol={this.state.symbolTemplate}
             submitLabel={"Erstellen"}
             submitHandler={this.addSymbol}
           />
