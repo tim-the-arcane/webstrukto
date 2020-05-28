@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-const SymbolForm = ({ symbol, submitLabel, submitHandler }) => {
+const SymbolForm = ({
+  submitLabel,
+  submitHandler,
+  symbol = { title: "", type: "" },
+}) => {
   const [title, setTitle] = useState(symbol.title);
   const [type, setType] = useState(symbol.type || "Process");
   const [id, setId] = useState(symbol.id);
@@ -15,23 +19,22 @@ const SymbolForm = ({ symbol, submitLabel, submitHandler }) => {
   return (
     <form
       className="SymbolForm"
-      onReset={(e) => {
+      onReset={e => {
         e.preventDefault();
         setTitle(symbol.title);
         setType(symbol.type);
         setChanges(false);
       }}
-      onSubmit={(e) => {
+      onSubmit={e => {
         e.preventDefault();
         submitHandler({ id: id, title: title, type: type });
-      }}
-    >
+      }}>
       <label htmlFor="title">Titel</label>
       <input
         id="title"
         type="text"
         value={title}
-        onChange={(e) => {
+        onChange={e => {
           setTitle(e.target.value);
           setChanges(true);
         }}
@@ -42,12 +45,11 @@ const SymbolForm = ({ symbol, submitLabel, submitHandler }) => {
       <select
         id="type"
         value={type}
-        onChange={(e) => {
+        onChange={e => {
           setType(e.target.value);
           setChanges(true);
         }}
-        required
-      >
+        required>
         <option value="Process">Prozess</option>
         <option value="TestFirstLoop">Kopfgesteuerte Schleife</option>
         <option value="TestLastLoop">Fußgesteuerte Schleife</option>
