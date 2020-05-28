@@ -3,8 +3,8 @@ import { v4 as uuid } from "uuid";
 import arrayMove from "array-move";
 
 import Symbols from "./components/Symbols";
-import SymbolForm from "./components/_SymbolForm";
 import EditModal from "./components/EditModal";
+import AddModal from "./components/AddModal";
 
 class App extends Component {
   state = {
@@ -34,6 +34,7 @@ class App extends Component {
         type: "Process",
       },
     ],
+    toggleAddModal: true,
     toggleEditModal: false,
     symbolToEdit: {
       title: "",
@@ -41,7 +42,7 @@ class App extends Component {
     },
   };
 
-  addSymbol = symbol => {
+  createSymbol = symbol => {
     this.setState({
       symbols: [
         ...this.state.symbols,
@@ -66,9 +67,23 @@ class App extends Component {
     });
   };
 
+  removeSymbol = symbolId => {
+    this.setState({
+      symbols: this.state.symbols.filter(symbol => symbol.id !== symbolId),
+    });
+  };
+
+  addSymbol = symbol => {
+    this.setState({
+      toggleEditModal: false,
+      toggleAddModal: true,
+    });
+  };
+
   editSymbol = symbol => {
     this.setState({
       symbolToEdit: symbol,
+      toggleAddModal: false,
       toggleEditModal: true,
     });
   };
@@ -89,12 +104,6 @@ class App extends Component {
 
     this.setState({
       symbols: arrayMove(this.state.symbols, from, to),
-    });
-  };
-
-  removeSymbol = symbolId => {
-    this.setState({
-      symbols: this.state.symbols.filter(symbol => symbol.id !== symbolId),
     });
   };
 
@@ -124,15 +133,20 @@ class App extends Component {
           />
         </div>
         <div className="container">
-          <h4>Symbol hinzufügen</h4>
-          <SymbolForm
+          <AddModal
+            toggleModal={() =>
+              this.setState({ toggleAddModal: !this.state.toggleAddModal })
+            }
+            active={this.state.toggleAddModal}
             symbol={this.state.symbolTemplate}
-            submitLabel={"Erstellen"}
-            submitHandler={this.addSymbol}
+            createSymbol={this.createSymbol}
           />
         </div>
         <div className="container">
           <EditModal
+            toggleModal={() =>
+              this.setState({ toggleEditModal: !this.state.toggleEditModal })
+            }
             active={this.state.toggleEditModal}
             symbol={this.state.symbolToEdit}
             editSymbol={this.updateSymbol}

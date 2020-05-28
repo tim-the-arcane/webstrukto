@@ -31,6 +31,7 @@ h2,
 h3,
 h4 {
   font-weight: lighter;
+  margin-top: 0;
 }
 
 /** Import BEM Blocks **/
@@ -64,6 +65,33 @@ h4 {
   width: calc(100% - 20px);
   max-width: 500px;
   margin: 0 auto;
+}
+
+.AddModal,
+.EditModal {
+  position: relative;
+  margin-top: 2rem;
+  background: white;
+  padding: 1rem;
+}
+
+.AddModal__toggle-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 20px;
+  font-size: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  border-radius: 50%;
+  background-color: rgb(214, 23, 23);
+  line-height: 20px;
+  color: white;
+
+  text-align: center;
 }
 
 .SymbolForm {
