@@ -99,6 +99,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="container">
+          <h1>webstrukto</h1>
+        </div>
         <Symbols
           symbols={this.state.symbols}
           editSymbol={this.editSymbol}
