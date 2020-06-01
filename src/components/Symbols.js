@@ -7,6 +7,7 @@ export class Symbols extends Component {
     super(props);
     this.state = {
       symbols: props.symbols,
+      rootOnly: props.rootOnly,
     };
   }
 
@@ -22,6 +23,14 @@ export class Symbols extends Component {
     }
   }
 
+  fetchChildren = symbol => {
+    if (!symbol.childSymbols || symbol.childSymbols.length === 0) return [];
+
+    return symbol.childSymbols.map(childId => {
+      return this.state.symbols.filter(symbol => symbol.id === childId)[0];
+    });
+  };
+
   render() {
     // Render placeholder instead of Symbols when list empty
     if (this.props.symbols.length === 0) {
@@ -34,15 +43,24 @@ export class Symbols extends Component {
 
     return (
       <div className="Symbols">
-        {this.state.symbols.map(symbol => (
-          <Symbol
-            key={symbol.id}
-            symbol={symbol}
-            editSymbol={this.editSymbol}
-            moveSymbol={this.moveSymbol}
-            removeSymbol={this.removeSymbol}
-          />
-        ))}
+        {this.state.symbols.map(symbol => {
+          if (this.state.rootOnly && symbol.parentSymbol !== 0) {
+            return null;
+          }
+
+          return (
+            <Symbol
+              key={symbol.id}
+              symbol={symbol}
+              symbolList={this.state.symbols}
+              editSymbol={this.editSymbol}
+              moveSymbol={this.moveSymbol}
+              removeSymbol={this.removeSymbol}
+              childSymbols={this.fetchChildren(symbol)}
+              fetchChildren={this.fetchChildren}
+            />
+          );
+        })}
       </div>
     );
   }

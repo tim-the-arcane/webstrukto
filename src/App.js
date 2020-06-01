@@ -11,27 +11,44 @@ class App extends Component {
     symbolTemplate: {
       title: "",
       type: "Process",
+      childSymbols: [],
+      parentSymbol: 0,
     },
     symbols: [
       {
-        id: uuid(),
-        title: "Schritt 1",
+        id: 1,
+        title: "Öffne webstrukto",
         type: "Process",
+        childSymbols: [],
+        parentSymbol: 0,
       },
       {
-        id: uuid(),
-        title: "Schritt 2",
+        id: 2,
+        title: "Erstelle Diagramm",
         type: "Process",
+        childSymbols: [],
+        parentSymbol: 0,
       },
       {
-        id: uuid(),
-        title: "Schritt 3",
-        type: "Process",
+        id: 4,
+        title: "So lange Diagramm nicht fertig",
+        type: "TestFirstLoop",
+        childSymbols: [5, 6],
+        parentSymbol: 0,
       },
       {
-        id: uuid(),
-        title: "Schritt 4",
+        id: 5,
+        title: "Füge Symbol hinzu",
         type: "Process",
+        childSymbols: [],
+        parentSymbol: 4,
+      },
+      {
+        id: 6,
+        title: "Bearbeite Symbole",
+        type: "Process",
+        childSymbols: [],
+        parentSymbol: 4,
       },
     ],
     toggleAddModal: true,
@@ -68,6 +85,8 @@ class App extends Component {
   };
 
   removeSymbol = symbolId => {
+    console.log(symbolId);
+
     this.setState({
       symbols: this.state.symbols.filter(symbol => symbol.id !== symbolId),
     });
@@ -89,6 +108,8 @@ class App extends Component {
   };
 
   moveSymbol = (symbolId, to) => {
+    console.log(`Move Symbol ${symbolId} ${to}`);
+
     const from = this.state.symbols.findIndex(symbol => symbol.id === symbolId);
 
     switch (to) {
@@ -130,6 +151,7 @@ class App extends Component {
             editSymbol={this.editSymbol}
             moveSymbol={this.moveSymbol}
             removeSymbol={this.removeSymbol}
+            rootOnly={true}
           />
         </div>
         <div className="container">
