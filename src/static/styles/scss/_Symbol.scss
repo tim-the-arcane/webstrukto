@@ -15,7 +15,7 @@
   right: 0;
 }
 
-.Symbol:hover .Symbol__buttons {
+.Symbol__header:hover .Symbol__buttons {
   display: flex;
 }
 
@@ -26,4 +26,18 @@
   margin: 0;
   padding: 0;
   border: 1px whitesmoke solid;
+}
+
+.Symbol__children {
+  width: calc(100% - 2rem);
+  margin-left: auto;
+
+  &--empty {
+    display: none;
+  }
+
+  .Symbols {
+    border-bottom: 0;
+    border-right: 0;
+  }
 }
