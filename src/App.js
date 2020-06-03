@@ -94,14 +94,15 @@ class App extends Component {
         return symbol;
       }),
       toggleEditModal: false,
+      symbolToEdit: {},
     });
   };
 
   removeSymbol = symbolId => {
-    console.log(symbolId);
-
     this.setState({
-      symbols: this.state.symbols.filter(symbol => symbol.id !== symbolId),
+      symbols: this.state.symbols.filter(
+        symbol => symbol.id !== symbolId && symbol.parentSymbol !== symbolId
+      ),
     });
   };
 
