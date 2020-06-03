@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const SymbolForm = ({
-  submitLabel,
-  submitHandler,
-  symbol = { title: "", type: "" },
-}) => {
+const SymbolForm = ({ submitLabel, submitHandler, symbol }) => {
   const [title, setTitle] = useState(symbol.title);
   const [type, setType] = useState(symbol.type || "Process");
   const [id, setId] = useState(symbol.id);

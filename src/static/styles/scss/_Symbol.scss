@@ -31,13 +31,9 @@
 .Symbol__children {
   width: calc(100% - 2rem);
   margin-left: auto;
+  border-left: 1px solid black;
 
   &--empty {
     display: none;
-  }
-
-  .Symbols {
-    border-bottom: 0;
-    border-right: 0;
   }
 }

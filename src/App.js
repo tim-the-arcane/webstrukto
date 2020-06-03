@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { v4 as uuid } from "uuid";
 import arrayMove from "array-move";
 
-import Symbols from "./components/Symbols";
+import Symbol from "./components/Symbol";
 import EditModal from "./components/EditModal";
 import AddModal from "./components/AddModal";
 
@@ -11,7 +11,6 @@ class App extends Component {
     symbolTemplate: {
       title: "",
       type: "Process",
-      childSymbols: [],
       parentSymbol: 0,
     },
     symbols: [
@@ -19,35 +18,42 @@ class App extends Component {
         id: 1,
         title: "Öffne webstrukto",
         type: "Process",
-        childSymbols: [],
         parentSymbol: 0,
       },
       {
         id: 2,
         title: "Erstelle Diagramm",
         type: "Process",
-        childSymbols: [],
+        parentSymbol: 0,
+      },
+      {
+        id: 3,
+        title: "So lange Diagramm nicht fertig",
+        type: "TestFirstLoop",
         parentSymbol: 0,
       },
       {
         id: 4,
-        title: "So lange Diagramm nicht fertig",
+        title: "Füge Symbol hinzu",
         type: "TestFirstLoop",
-        childSymbols: [5, 6],
-        parentSymbol: 0,
+        parentSymbol: 3,
       },
       {
         id: 5,
-        title: "Füge Symbol hinzu",
-        type: "Process",
-        childSymbols: [],
-        parentSymbol: 4,
+        title: "Bearbeite Symbole",
+        type: "TestFirstLoop",
+        parentSymbol: 3,
       },
       {
         id: 6,
-        title: "Bearbeite Symbole",
+        title: "Setze Titel",
         type: "Process",
-        childSymbols: [],
+        parentSymbol: 4,
+      },
+      {
+        id: 7,
+        title: "Setze Tyo",
+        type: "Process",
         parentSymbol: 4,
       },
     ],
@@ -66,9 +72,16 @@ class App extends Component {
         {
           ...symbol,
           id: uuid(),
+          parentSymbol: 0,
         },
       ],
     });
+  };
+
+  getSymbols = symbolId => {
+    return this.state.symbols.filter(
+      symbol => symbol.parentSymbol === symbolId
+    );
   };
 
   updateSymbol = editedSymbol => {
@@ -92,7 +105,7 @@ class App extends Component {
     });
   };
 
-  addSymbol = symbol => {
+  addSymbol = () => {
     this.setState({
       toggleEditModal: false,
       toggleAddModal: true,
@@ -129,6 +142,10 @@ class App extends Component {
   };
 
   render() {
+    const rootSymbolCount = this.state.symbols.filter(
+      symbol => symbol.parentSymbol === 0
+    ).length;
+
     return (
       <div className="App">
         <header>
@@ -146,13 +163,27 @@ class App extends Component {
           </div>
         </header>
         <div className="container">
-          <Symbols
-            symbols={this.state.symbols}
-            editSymbol={this.editSymbol}
-            moveSymbol={this.moveSymbol}
-            removeSymbol={this.removeSymbol}
-            rootOnly={true}
-          />
+          {rootSymbolCount > 0 && (
+            <div className="Symbols">
+              {this.getSymbols(0).map(symbol => (
+                <Symbol
+                  key={symbol.id}
+                  getSymbols={this.getSymbols}
+                  symbol={symbol}
+                  removeSymbol={this.removeSymbol}
+                  editSymbol={this.editSymbol}
+                  moveSymbol={this.moveSymbol}
+                />
+              ))}
+            </div>
+          )}
+          {rootSymbolCount === 0 && (
+            <div className="Symbols--empty">
+              <p onClick={() => this.addSymbol()}>
+                Füge ein Symbol hinzu um zu beginnen.
+              </p>
+            </div>
+          )}
         </div>
         <div className="container">
           <AddModal
