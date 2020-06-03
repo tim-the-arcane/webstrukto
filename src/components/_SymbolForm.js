@@ -23,7 +23,7 @@ const SymbolForm = ({ submitLabel, submitHandler, symbol }) => {
       }}
       onSubmit={e => {
         e.preventDefault();
-        submitHandler({ id: id, title: title, type: type });
+        submitHandler({ ...symbol, id: id, title: title, type: type });
       }}>
       <label htmlFor="title">Titel</label>
       <input
