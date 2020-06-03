@@ -41,14 +41,9 @@ class Symbol extends Component {
             symbol={this.state.symbol}
           />
         </div>
-        <div
-          className={
-            "Symbol__children " +
-            (this.state.childSymbols.length === 0
-              ? "Symbol__children--empty"
-              : "")
-          }>
-          {
+
+        {this.state.childSymbols.length > 0 && (
+          <div className={"Symbol__children"}>
             <Symbols
               symbols={this.state.childSymbols}
               editSymbol={this.editSymbol}
@@ -56,8 +51,8 @@ class Symbol extends Component {
               removeSymbol={() => this.removeSymbol}
               rootOnly={false}
             />
-          }
-        </div>
+          </div>
+        )}
       </div>
     );
   }
