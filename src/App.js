@@ -56,6 +56,12 @@ class App extends Component {
         type: "Process",
         parentSymbol: 4,
       },
+      {
+        id: 8,
+        title: "Prüfe Typ",
+        type: "Condition",
+        parentSymbol: 0,
+      },
     ],
     toggleAddModal: true,
     toggleEditModal: false,
@@ -149,7 +155,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header>
+        <header id="masthead">
           <div className="container">
             <h1 className="logo">
               webstrukto <br />
@@ -157,7 +163,8 @@ class App extends Component {
                 style={{
                   fontSize: "0.5em",
                   lineHeight: "1em",
-                }}>
+                }}
+              >
                 – der Struktogramm-Editor für's Web
               </span>
             </h1>
