@@ -29,7 +29,7 @@ class App extends Component {
       {
         id: 3,
         title: "So lange Diagramm nicht fertig",
-        type: "TestFirstLoop",
+        type: "TestLastLoop",
         parentSymbol: 0,
       },
       {
@@ -41,7 +41,7 @@ class App extends Component {
       {
         id: 5,
         title: "Bearbeite Symbole",
-        type: "TestFirstLoop",
+        type: "Process",
         parentSymbol: 3,
       },
       {
@@ -52,7 +52,7 @@ class App extends Component {
       },
       {
         id: 7,
-        title: "Setze Tyo",
+        title: "Setze Typ",
         type: "Process",
         parentSymbol: 4,
       },
