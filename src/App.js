@@ -14,56 +14,9 @@ const SYMBOL_TEMPLATE = {
 
 class App extends Component {
   state = {
-    symbols: [
-      {
-        id: 1,
-        title: "Öffne webstrukto",
-        type: "Process",
-        parentSymbol: 0,
-      },
-      {
-        id: 2,
-        title: "Erstelle Diagramm",
-        type: "Process",
-        parentSymbol: 0,
-      },
-      {
-        id: 3,
-        title: "So lange Diagramm nicht fertig",
-        type: "TestLastLoop",
-        parentSymbol: 0,
-      },
-      {
-        id: 4,
-        title: "Füge Symbol hinzu",
-        type: "TestFirstLoop",
-        parentSymbol: 3,
-      },
-      {
-        id: 5,
-        title: "Bearbeite Symbole",
-        type: "Process",
-        parentSymbol: 3,
-      },
-      {
-        id: 6,
-        title: "Setze Titel",
-        type: "Process",
-        parentSymbol: 4,
-      },
-      {
-        id: 7,
-        title: "Setze Typ",
-        type: "Process",
-        parentSymbol: 4,
-      },
-      {
-        id: 8,
-        title: "Prüfe Typ",
-        type: "Condition",
-        parentSymbol: 0,
-      },
-    ],
+    symbols: [],
+    undoStack: [],
+    redoStack: [],
     toggleAddModal: true,
     toggleEditModal: false,
     symbolToEdit: {
@@ -72,8 +25,58 @@ class App extends Component {
     },
   };
 
-  createSymbol = symbol => {
+  setSymbolState = symbols => {
+    const newStackEntry = this.state.symbols;
+
     this.setState({
+      undoStack: [...this.state.undoStack, newStackEntry],
+      redoStack: [],
+      symbols: symbols.symbols,
+    });
+  };
+
+  undo = () => {
+    if (this.state.undoStack.length === 0) {
+      return false;
+    }
+
+    const currentSymbolList = [...this.state.symbols];
+    const previousSymbolList = [...this.state.undoStack].pop();
+
+    this.setState({
+      undoStack: [...this.state.undoStack].slice(0, -1),
+      redoStack: [...this.state.redoStack, currentSymbolList],
+      symbols: previousSymbolList,
+    });
+  };
+
+  redo = () => {
+    if (this.state.redoStack.length === 0) {
+      return false;
+    }
+
+    const currentSymbolList = [...this.state.symbols];
+    const nextSymbolList = [...this.state.redoStack].pop();
+
+    this.setState({
+      undoStack: [...this.state.undoStack, currentSymbolList],
+      redoStack: [...this.state.redoStack].slice(0, -1),
+      symbols: nextSymbolList,
+    });
+  };
+
+  saveState = () => {
+    localStorage.setItem("saveState", JSON.stringify(this.state));
+  };
+
+  loadState = () => {
+    const loadedState = JSON.parse(localStorage.getItem("saveState"));
+
+    this.setState(loadedState);
+  };
+
+  createSymbol = symbol => {
+    this.setSymbolState({
       symbols: [
         ...this.state.symbols,
         {
@@ -92,7 +95,7 @@ class App extends Component {
   };
 
   updateSymbol = editedSymbol => {
-    this.setState({
+    this.setSymbolState({
       symbols: this.state.symbols.map(symbol => {
         if (symbol.id === editedSymbol.id) {
           return editedSymbol;
@@ -106,7 +109,7 @@ class App extends Component {
   };
 
   removeSymbol = symbolId => {
-    this.setState({
+    this.setSymbolState({
       symbols: this.state.symbols.filter(
         symbol => symbol.id !== symbolId && symbol.parentSymbol !== symbolId
       ),
@@ -156,6 +159,11 @@ class App extends Component {
 
     return (
       <div className="App">
+        <button onClick={() => this.undo()}>Undo</button>
+        <button onClick={() => this.redo()}>Redo</button>
+        <button onClick={() => this.saveState()}>Save</button>
+        <button onClick={() => this.loadState()}>Load</button>
+        {/* <button onClick={() => this.export()}>Export</button> */}
         <header id="masthead">
           <div className="container">
             <h1 className="logo">
