@@ -6,13 +6,14 @@ import Symbol from "./components/Symbol";
 import EditModal from "./components/EditModal";
 import AddModal from "./components/AddModal";
 
+const SYMBOL_TEMPLATE = {
+  title: "",
+  type: "Process",
+  parentSymbol: 0,
+};
+
 class App extends Component {
   state = {
-    symbolTemplate: {
-      title: "",
-      type: "Process",
-      parentSymbol: 0,
-    },
     symbols: [
       {
         id: 1,
@@ -84,9 +85,9 @@ class App extends Component {
     });
   };
 
-  getSymbols = symbolId => {
+  getSymbols = parentSymbolId => {
     return this.state.symbols.filter(
-      symbol => symbol.parentSymbol === symbolId
+      symbol => symbol.parentSymbol === parentSymbolId
     );
   };
 
@@ -199,7 +200,7 @@ class App extends Component {
               this.setState({ toggleAddModal: !this.state.toggleAddModal })
             }
             active={this.state.toggleAddModal}
-            symbol={this.state.symbolTemplate}
+            symbol={SYMBOL_TEMPLATE}
             createSymbol={this.createSymbol}
           />
         </div>
