@@ -33,6 +33,7 @@ const Symbol = ({
       break;
 
     default:
+      return null;
   }
 
   return (
