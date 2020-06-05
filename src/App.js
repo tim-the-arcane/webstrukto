@@ -32,6 +32,8 @@ class App extends Component {
       undoStack: [...this.state.undoStack, newStackEntry],
       redoStack: [],
       symbols: symbols.symbols,
+      toggleEditModal: false,
+      symbolToEdit: {},
     });
   };
 
@@ -159,11 +161,6 @@ class App extends Component {
 
     return (
       <div className="App">
-        <button onClick={() => this.undo()}>Undo</button>
-        <button onClick={() => this.redo()}>Redo</button>
-        <button onClick={() => this.saveState()}>Save</button>
-        <button onClick={() => this.loadState()}>Load</button>
-        {/* <button onClick={() => this.export()}>Export</button> */}
         <header id="masthead">
           <div className="container">
             <h1 className="logo">
@@ -179,6 +176,32 @@ class App extends Component {
             </h1>
           </div>
         </header>
+        <div className="container">
+          <div
+            className="MenuBar"
+            style={{
+              marginBlock: "1rem",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <button
+              onClick={() => this.undo()}
+              disabled={this.state.undoStack.length === 0}
+            >
+              Rückgängig
+            </button>
+            <button
+              onClick={() => this.redo()}
+              disabled={this.state.redoStack.length === 0}
+            >
+              Wiederholen
+            </button>
+            <button onClick={() => this.saveState()}>Speichern</button>
+            <button onClick={() => this.loadState()}>Laden</button>
+            {/* <button onClick={() => this.export()}>Export</button> */}
+          </div>
+        </div>
         <div className="container">
           {rootSymbolCount > 0 && (
             <div className="Symbols">
@@ -213,14 +236,16 @@ class App extends Component {
           />
         </div>
         <div className="container">
-          <EditModal
-            toggleModal={() =>
-              this.setState({ toggleEditModal: !this.state.toggleEditModal })
-            }
-            active={this.state.toggleEditModal}
-            symbol={this.state.symbolToEdit}
-            editSymbol={this.updateSymbol}
-          />
+          {this.state.toggleEditModal && (
+            <EditModal
+              toggleModal={() =>
+                this.setState({ toggleEditModal: !this.state.toggleEditModal })
+              }
+              active={this.state.toggleEditModal}
+              symbol={this.state.symbolToEdit}
+              editSymbol={this.updateSymbol}
+            />
+          )}
         </div>
       </div>
     );
