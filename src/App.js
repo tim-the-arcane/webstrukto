@@ -262,21 +262,44 @@ class App extends Component {
               onClick={() => this.undo()}
               disabled={this.state.undoStack.length === 0}
             >
-              Rückgängig
+              ↩️
             </button>
             <button
               onClick={() => this.redo()}
               disabled={this.state.redoStack.length === 0}
             >
-              Wiederholen
+              ↪️
             </button>
-            <button onClick={() => this.saveState(true)}>Speichern</button>
+            <button
+              disabled={
+                this.state.undoStack.length === 0 &&
+                this.state.redoStack.length === 0
+              }
+              onClick={() => this.saveState(true)}
+            >
+              💾
+            </button>
             <input
               type="file"
               onChange={e => this.openFile(e.target.files[0])}
+              id="fileUploadField"
+              style={{
+                display: "none",
+              }}
             />
-            <button onClick={() => this.clearState()}>Löschen</button>
-            {/* <button onClick={() => this.export()}>Export</button> */}
+            <button
+              onClick={() => {
+                document.getElementById("fileUploadField").click();
+              }}
+            >
+              📂
+            </button>
+            <button
+              disabled={this.state === INITIAL_STATE}
+              onClick={() => this.clearState()}
+            >
+              🗑️
+            </button>
           </div>
         </div>
         <div className="container">
