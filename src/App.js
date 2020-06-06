@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { v4 as uuid } from "uuid";
 import arrayMove from "array-move";
 
+import ProjectTitle from "./components/ProjectTitle";
 import Symbol from "./components/Symbol";
 import EditModal from "./components/EditModal";
 import AddModal from "./components/AddModal";
@@ -12,29 +13,111 @@ const SYMBOL_TEMPLATE = {
   parentSymbol: 0,
 };
 
+const INITIAL_STATE = {
+  projectTitle: "Neues Struktogramm",
+  symbols: [],
+  undoStack: [],
+  redoStack: [],
+  toggleAddModal: true,
+  toggleEditModal: false,
+  symbolToEdit: {
+    title: "",
+    type: "Process",
+  },
+};
+
+let localStorageContent = JSON.parse(localStorage.getItem("saveState"));
+
 class App extends Component {
-  state = {
-    symbols: [],
-    undoStack: [],
-    redoStack: [],
-    toggleAddModal: true,
-    toggleEditModal: false,
-    symbolToEdit: {
-      title: "",
-      type: "Process",
-    },
+  state =
+    localStorageContent !== null ? localStorageContent : { ...INITIAL_STATE };
+
+  saveFile = (blob, filename) => {
+    const dataURI = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = dataURI;
+    a.download = filename;
+    a.click();
+
+    return true;
+  };
+
+  saveState = saveToDisk => {
+    localStorage.setItem("saveState", JSON.stringify(this.state));
+
+    if (saveToDisk) {
+      const currentDate = new Date().toLocaleDateString("de-DE");
+      const projectTitle = this.state.projectTitle;
+      const fileName = `webstrukto-${currentDate}-${projectTitle}.json`;
+
+      const cleanedSnapshot = { ...this.state, undoStack: [], redoStack: [] };
+
+      const fileToSave = new Blob([JSON.stringify(cleanedSnapshot)], {
+        type: "application/json",
+        name: "webstrukto",
+      });
+
+      this.saveFile(fileToSave, fileName);
+    }
+
+    return true;
+  };
+
+  openFile = async file => {
+    let reader = new FileReader();
+
+    reader.onload = () => {
+      const fileContent = reader.result;
+
+      this.importFile(fileContent);
+    };
+
+    reader.readAsText(file);
+  };
+
+  importFile = async fileContent => {
+    this.setState({
+      ...JSON.parse(fileContent),
+    });
+
+    return true;
+  };
+
+  loadState = async () => {
+    const loadedState = await this.openFile();
+
+    this.setState(loadedState);
+  };
+
+  clearState = () => {
+    localStorage.setItem("saveState", null);
+    this.setState({ ...INITIAL_STATE });
+    return true;
+  };
+
+  updateProjectTitle = title => {
+    this.setState(
+      {
+        projectTitle: title,
+      },
+      () => this.saveState(false)
+    );
   };
 
   setSymbolState = symbols => {
     const newStackEntry = this.state.symbols;
 
-    this.setState({
-      undoStack: [...this.state.undoStack, newStackEntry],
-      redoStack: [],
-      symbols: symbols.symbols,
-      toggleEditModal: false,
-      symbolToEdit: {},
-    });
+    this.setState(
+      {
+        undoStack: [...this.state.undoStack, newStackEntry],
+        redoStack: [],
+        symbols: symbols.symbols,
+        toggleEditModal: false,
+        symbolToEdit: {},
+      },
+      () => this.saveState(false)
+    );
   };
 
   undo = () => {
@@ -65,16 +148,6 @@ class App extends Component {
       redoStack: [...this.state.redoStack].slice(0, -1),
       symbols: nextSymbolList,
     });
-  };
-
-  saveState = () => {
-    localStorage.setItem("saveState", JSON.stringify(this.state));
-  };
-
-  loadState = () => {
-    const loadedState = JSON.parse(localStorage.getItem("saveState"));
-
-    this.setState(loadedState);
   };
 
   createSymbol = symbol => {
@@ -197,10 +270,20 @@ class App extends Component {
             >
               Wiederholen
             </button>
-            <button onClick={() => this.saveState()}>Speichern</button>
-            <button onClick={() => this.loadState()}>Laden</button>
+            <button onClick={() => this.saveState(true)}>Speichern</button>
+            <input
+              type="file"
+              onChange={e => this.openFile(e.target.files[0])}
+            />
+            <button onClick={() => this.clearState()}>Löschen</button>
             {/* <button onClick={() => this.export()}>Export</button> */}
           </div>
+        </div>
+        <div className="container">
+          <ProjectTitle
+            title={this.state.projectTitle}
+            updateProjectTitle={this.updateProjectTitle}
+          />
         </div>
         <div className="container">
           {rootSymbolCount > 0 && (
