@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ProjectTitle = props => {
   const [title, setTitle] = useState(props.title);
   const [showModal, toggleModal] = useState(false);
+
+  useEffect(() => {
+    setTitle(props.title);
+  }, [props]);
 
   return (
     <header className="ProjectTitle">
