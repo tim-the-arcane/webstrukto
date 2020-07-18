@@ -294,8 +294,6 @@ class App extends Component {
         </header>
 
         <div className="wrapper">
-          <div className="container"></div>
-
           <article id="diagram">
             <div className="container">
               <header>
