@@ -67,13 +67,12 @@ h1 {
 .MenuBar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
 
   padding-top: var(--gap);
 
   button {
     margin-right: var(--gap);
-    margin-bottom: var(--gap);
   }
 }
 
@@ -88,57 +87,24 @@ h1 {
 
 #canvas {
   flex: 1;
-  padding-bottom: 4rem;
+  padding-bottom: 25vh;
 }
 
 #control {
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: var(--gap);
   min-height: calc(var(--gap) * 2 + 48px);
-  width: 100%;
+  width: calc(var(--container-width) - var(--gap) * 2);
   padding: var(--gap);
-  background-color: yellow;
-
-  #toggleOffCanvas {
-    position: absolute;
-    top: var(--gap);
-    right: var(--gap);
-    display: block;
-    width: 48px;
-    height: 48px;
-    text-align: center;
-    line-height: 48px;
-    font-size: 48px;
-    transition: 0.3s ease-in-out;
-
-    &::before {
-      content: "";
-      display: inline-block;
-      border: solid orange;
-      border-width: 0 8px 8px 0;
-      padding: 8px;
-      transform: rotate(-135deg);
-    }
-
-    span {
-      display: none;
-    }
-  }
-
-  #toggleOffCanvasInput:checked + #toggleOffCanvas {
-    transform: rotate(-180deg);
-  }
+  background-color: white;
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 0 8px -2px rgba(0, 0, 0, 0.4);
 
   form {
-    opacity: 0;
-    height: 0;
+    // opacity: 0;
+    // height: 0;
     transition: all 0.3s ease-out, opacity 0.1s;
-  }
-
-  #toggleOffCanvasInput:checked ~ form {
-    opacity: 1;
-    height: min-content;
   }
 }
 
@@ -170,12 +136,13 @@ h1 {
   select,
   button {
     margin-top: 0.25em;
-    margin-bottom: 1em;
     font-size: 1rem;
   }
 
   input,
-  option {
+  option,
+  select {
+    margin-bottom: 1em;
     padding: 5px;
   }
 }
@@ -191,17 +158,17 @@ input {
 }
 
 // Media Queries
-@media (min-width: $breakpoint-sm) {
-  :root {
-    --gap: 0.7rem;
-  }
-}
-
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-lg) {
   :root {
     --font-size: 18px;
     --gap: 1rem;
-    --container-width: 600px;
+    --container-width: min(calc(100vw - 4rem), 1200px);
+  }
+
+  .MenuBar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
   }
 
   #diagram {
@@ -209,28 +176,8 @@ input {
     padding: 0;
   }
 
-  #control {
-    position: relative;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.4);
-
-    #toggleOffCanvas {
-      display: none;
-    }
-
-    form {
-      visibility: visible;
-      opacity: 1;
-      height: initial;
-    }
-  }
-}
-
-@media (min-width: $breakpoint-lg) {
-  :root {
-    --gap: 1rem;
-    --container-width: min(calc(100vw - 4rem), 1200px);
+  #canvas {
+    padding-bottom: var(--gap);
   }
 
   .wrapper {
@@ -252,8 +199,9 @@ input {
   #control {
     grid-area: control;
     position: relative;
+    left: 0;
     height: initial;
-    width: initial;
+    width: 100%;
     margin-right: var(--gap);
     background-color: white;
     border-radius: 5px;
