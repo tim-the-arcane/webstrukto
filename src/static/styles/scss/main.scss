@@ -1,36 +1,18 @@
+@import "reset";
+@import "variables";
+
 :root {
-  font-size: 16px;
-  font-family: sans-serif;
+  --container-width: 100%;
+  --padding: 0.5rem;
+  --font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  font-size: var(--font-size);
 }
 
 body {
-  margin: 0 auto;
-  padding: 0;
   background-color: whitesmoke;
   max-height: 100vh;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-#masthead {
-  width: 100%;
-  background-color: darkslateblue;
-}
-
-.logo {
-  color: rgb(255, 255, 137);
-  margin-top: 0;
-  padding: 1rem 0;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-weight: lighter;
-  margin-top: 0;
+  overflow-x: hidden;
 }
 
 /** Import BEM Blocks **/
@@ -48,7 +30,7 @@ h4 {
     justify-content: center;
     align-items: center;
     min-height: 3rem;
-    font-size: 1em;
+    font-size: 1rem;
     color: rgb(119, 119, 119);
     border: 0.125rem currentColor dashed;
     border-radius: 3px;
@@ -60,18 +42,103 @@ h4 {
   }
 }
 
+.wrapper,
 .container {
-  width: calc(100% - 20px);
-  max-width: 500px;
+  max-width: var(--container-width);
   margin: 0 auto;
 }
 
-.AddModal,
-.EditModal {
-  position: relative;
-  margin-top: 2rem;
-  background: white;
-  padding: 1rem;
+#masthead {
+  background: #ff8f00;
+  color: #fffde7;
+  padding: var(--padding);
+  font-size: 0.7rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 300;
+
+  span {
+    display: block;
+    font-weight: 500;
+    font-size: 0.5em;
+  }
+}
+
+.MenuBar {
+  display: flex;
+  justify-content: start;
+
+  padding-block: var(--padding);
+
+  button {
+    margin-right: var(--padding);
+  }
+}
+
+#diagram,
+#control {
+  margin-top: var(--padding);
+}
+
+#diagram {
+  padding: var(--padding);
+}
+
+#canvas {
+  flex: 1;
+}
+
+#control {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  min-height: calc(var(--padding) * 2 + 48px);
+  width: 100%;
+  padding: var(--padding);
+  background-color: yellow;
+
+  #toggleOffCanvas {
+    position: absolute;
+    top: var(--padding);
+    right: var(--padding);
+    display: block;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    font-size: 48px;
+    transition: 0.3s ease-in-out;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      border: solid orange;
+      border-width: 0 8px 8px 0;
+      padding: 8px;
+      transform: rotate(-135deg);
+    }
+
+    span {
+      display: none;
+    }
+  }
+
+  #toggleOffCanvasInput:checked + #toggleOffCanvas {
+    transform: rotate(-180deg);
+  }
+
+  form {
+    opacity: 0;
+    height: 0;
+    transition: all 0.3s ease-out, opacity 0.1s;
+  }
+
+  #toggleOffCanvasInput:checked ~ form {
+    opacity: 1;
+    height: min-content;
+  }
 }
 
 .AddModal__toggle-button {
@@ -120,3 +187,68 @@ h4 {
     width: calc(50% - 0.5em);
   }
 }
+
+input {
+  border: 1px solid grey;
+}
+
+// Media Queries
+@media (min-width: $breakpoint-sm) {
+  :root {
+    --padding: 0.7rem;
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  :root {
+    --font-size: 18px;
+    --padding: 1rem;
+    --container-width: 600px;
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 150px 1fr;
+    gap: var(--padding);
+    grid-template-areas: "control diagram";
+  }
+
+  #diagram {
+    grid-area: diagram;
+    padding: 0;
+  }
+
+  #control {
+    grid-area: control;
+    position: relative;
+    height: initial;
+    margin-right: var(--padding);
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.4);
+
+    #toggleOffCanvas {
+      display: none;
+    }
+
+    form {
+      visibility: visible;
+      opacity: 1;
+      height: initial;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-lg) {
+  :root {
+    --padding: 1rem;
+    --container-width: min(calc(100vw - 4rem), 1200px);
+  }
+
+  .wrapper {
+    grid-template-columns: 300px 1fr;
+  }
+}
+
+@import "utilities";
