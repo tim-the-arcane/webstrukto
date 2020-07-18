@@ -3,7 +3,7 @@
 
 :root {
   --container-width: 100%;
-  --padding: 0.5rem;
+  --gap: 0.5rem;
   --font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-size: var(--font-size);
@@ -11,8 +11,6 @@
 
 body {
   background-color: whitesmoke;
-  max-height: 100vh;
-  overflow-x: hidden;
 }
 
 /** Import BEM Blocks **/
@@ -51,7 +49,7 @@ body {
 #masthead {
   background: #ff8f00;
   color: #fffde7;
-  padding: var(--padding);
+  padding: var(--gap);
   font-size: 0.7rem;
 }
 
@@ -68,41 +66,44 @@ h1 {
 
 .MenuBar {
   display: flex;
-  justify-content: start;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 
-  padding-block: var(--padding);
+  padding-top: var(--gap);
 
   button {
-    margin-right: var(--padding);
+    margin-right: var(--gap);
+    margin-bottom: var(--gap);
   }
 }
 
 #diagram,
 #control {
-  margin-top: var(--padding);
+  margin-top: var(--gap);
 }
 
 #diagram {
-  padding: var(--padding);
+  padding: var(--gap);
 }
 
 #canvas {
   flex: 1;
+  padding-bottom: 4rem;
 }
 
 #control {
   position: fixed;
   bottom: 0;
   left: 0;
-  min-height: calc(var(--padding) * 2 + 48px);
+  min-height: calc(var(--gap) * 2 + 48px);
   width: 100%;
-  padding: var(--padding);
+  padding: var(--gap);
   background-color: yellow;
 
   #toggleOffCanvas {
     position: absolute;
-    top: var(--padding);
-    right: var(--padding);
+    top: var(--gap);
+    right: var(--gap);
     display: block;
     width: 48px;
     height: 48px;
@@ -143,8 +144,8 @@ h1 {
 
 .AddModal__toggle-button {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: var(--gap);
+  right: var(--gap);
   width: 20px;
   font-size: 20px;
   height: 20px;
@@ -163,6 +164,7 @@ h1 {
 .SymbolForm {
   display: flex;
   flex-direction: column;
+  margin-top: var(--gap);
 
   input,
   select,
@@ -182,10 +184,6 @@ h1 {
   display: flex;
   flex: 1;
   justify-content: space-between;
-
-  button {
-    width: calc(50% - 0.5em);
-  }
 }
 
 input {
@@ -195,23 +193,15 @@ input {
 // Media Queries
 @media (min-width: $breakpoint-sm) {
   :root {
-    --padding: 0.7rem;
+    --gap: 0.7rem;
   }
 }
 
 @media (min-width: $breakpoint-md) {
   :root {
     --font-size: 18px;
-    --padding: 1rem;
+    --gap: 1rem;
     --container-width: 600px;
-  }
-
-  .wrapper {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 150px 1fr;
-    gap: var(--padding);
-    grid-template-areas: "control diagram";
   }
 
   #diagram {
@@ -220,10 +210,7 @@ input {
   }
 
   #control {
-    grid-area: control;
     position: relative;
-    height: initial;
-    margin-right: var(--padding);
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.4);
@@ -242,12 +229,45 @@ input {
 
 @media (min-width: $breakpoint-lg) {
   :root {
-    --padding: 1rem;
+    --gap: 1rem;
     --container-width: min(calc(100vw - 4rem), 1200px);
   }
 
   .wrapper {
-    grid-template-columns: 300px 1fr;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 3fr;
+    gap: var(--gap);
+    grid-template-areas:
+      "control diagram"
+      ".       diagram";
+    padding-bottom: calc(var(--gap) * 2);
+  }
+
+  #diagram {
+    grid-area: diagram;
+    padding: 0;
+  }
+
+  #control {
+    grid-area: control;
+    position: relative;
+    height: initial;
+    width: initial;
+    margin-right: var(--gap);
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.4);
+
+    #toggleOffCanvas {
+      display: none;
+    }
+
+    form {
+      visibility: visible;
+      opacity: 1;
+      height: initial;
+    }
   }
 }
 
