@@ -72,7 +72,28 @@ h1 {
   padding-top: var(--gap);
 
   button {
-    margin-right: var(--gap);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 0;
+    background-color: lighten(#ff8f00, 12);
+    color: white;
+    padding: 0;
+    margin-right: calc(var(--gap) / 2);
+    transition: transform 0.3s ease-out;
+
+    &:disabled {
+      color: grey;
+    }
+
+    &:hover:not(:disabled) {
+      transform: translateY(-7px);
+    }
+
+    span {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 

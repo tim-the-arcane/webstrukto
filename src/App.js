@@ -3,6 +3,12 @@ import { v4 as uuid } from "uuid";
 import arrayMove from "array-move";
 import "typeface-roboto";
 
+import UndoIcon from "@material-ui/icons/UndoRounded";
+import RedoIcon from "@material-ui/icons/RedoRounded";
+import SaveIcon from "@material-ui/icons/SaveRounded";
+import FolderOpenIcon from "@material-ui/icons/FolderOpenRounded";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForeverRounded";
+
 import ProjectTitle from "./components/ProjectTitle";
 import Symbol from "./components/Symbol";
 import EditModal from "./components/EditModal";
@@ -246,14 +252,14 @@ class App extends Component {
                 onClick={() => this.undo()}
                 disabled={this.state.undoStack.length === 0}>
                 <span role="img" aria-label="Rückgängig">
-                  ↩️
+                  <UndoIcon />
                 </span>
               </button>
               <button
                 onClick={() => this.redo()}
                 disabled={this.state.redoStack.length === 0}>
                 <span role="img" aria-label="Wiederholen">
-                  ↪️
+                  <RedoIcon />
                 </span>
               </button>
               <button
@@ -263,7 +269,7 @@ class App extends Component {
                 }
                 onClick={() => this.saveState(true)}>
                 <span role="img" aria-label="Projektdatei speichern">
-                  💾
+                  <SaveIcon />
                 </span>
               </button>
               <input
@@ -279,14 +285,14 @@ class App extends Component {
                   document.getElementById("fileUploadField").click();
                 }}>
                 <span role="img" aria-label="Projektdatei öffnen">
-                  📂
+                  <FolderOpenIcon />
                 </span>
               </button>
               <button
                 disabled={this.state === INITIAL_STATE}
                 onClick={() => this.clearState()}>
                 <span role="img" aria-label="Projekt löschen">
-                  🗑️
+                  <DeleteForeverIcon />
                 </span>
               </button>
             </div>
