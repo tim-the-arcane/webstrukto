@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { v4 as uuid } from "uuid";
 import arrayMove from "array-move";
+import "typeface-roboto";
 
 import ProjectTitle from "./components/ProjectTitle";
 import Symbol from "./components/Symbol";
@@ -236,122 +237,123 @@ class App extends Component {
       <div className="App">
         <header id="masthead">
           <div className="container">
-            <h1 className="logo">
-              webstrukto <br />
-              <span
-                style={{
-                  fontSize: "0.5em",
-                  lineHeight: "1em",
-                }}
-              >
-                – der Struktogramm-Editor für's Web
-              </span>
+            <h1>
+              webstrukto
+              <span>– Der Struktogramm-Editor fürs Web</span>
             </h1>
+            <div className="MenuBar">
+              <button
+                onClick={() => this.undo()}
+                disabled={this.state.undoStack.length === 0}>
+                <span role="img" aria-label="Rückgängig">
+                  ↩️
+                </span>
+              </button>
+              <button
+                onClick={() => this.redo()}
+                disabled={this.state.redoStack.length === 0}>
+                <span role="img" aria-label="Wiederholen">
+                  ↪️
+                </span>
+              </button>
+              <button
+                disabled={
+                  this.state.undoStack.length === 0 &&
+                  this.state.redoStack.length === 0
+                }
+                onClick={() => this.saveState(true)}>
+                <span role="img" aria-label="Projektdatei speichern">
+                  💾
+                </span>
+              </button>
+              <input
+                type="file"
+                onChange={e => this.openFile(e.target.files[0])}
+                id="fileUploadField"
+                style={{
+                  display: "none",
+                }}
+              />
+              <button
+                onClick={() => {
+                  document.getElementById("fileUploadField").click();
+                }}>
+                <span role="img" aria-label="Projektdatei öffnen">
+                  📂
+                </span>
+              </button>
+              <button
+                disabled={this.state === INITIAL_STATE}
+                onClick={() => this.clearState()}>
+                <span role="img" aria-label="Projekt löschen">
+                  🗑️
+                </span>
+              </button>
+            </div>
           </div>
         </header>
-        <div className="container">
-          <div
-            className="MenuBar"
-            style={{
-              marginBlock: "1rem",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <button
-              onClick={() => this.undo()}
-              disabled={this.state.undoStack.length === 0}
-            >
-              ↩️
-            </button>
-            <button
-              onClick={() => this.redo()}
-              disabled={this.state.redoStack.length === 0}
-            >
-              ↪️
-            </button>
-            <button
-              disabled={
-                this.state.undoStack.length === 0 &&
-                this.state.redoStack.length === 0
-              }
-              onClick={() => this.saveState(true)}
-            >
-              💾
-            </button>
-            <input
-              type="file"
-              onChange={e => this.openFile(e.target.files[0])}
-              id="fileUploadField"
-              style={{
-                display: "none",
-              }}
-            />
-            <button
-              onClick={() => {
-                document.getElementById("fileUploadField").click();
-              }}
-            >
-              📂
-            </button>
-            <button
-              disabled={this.state === INITIAL_STATE}
-              onClick={() => this.clearState()}
-            >
-              🗑️
-            </button>
-          </div>
-        </div>
-        <div className="container">
-          <ProjectTitle
-            title={this.state.projectTitle}
-            updateProjectTitle={this.updateProjectTitle}
-          />
-        </div>
-        <div className="container">
-          {rootSymbolCount > 0 && (
-            <div className="Symbols">
-              {this.getSymbols(0).map(symbol => (
-                <Symbol
-                  key={symbol.id}
-                  getSymbols={this.getSymbols}
-                  symbol={symbol}
-                  removeSymbol={this.removeSymbol}
-                  editSymbol={this.editSymbol}
-                  moveSymbol={this.moveSymbol}
+
+        <div className="wrapper">
+          <div className="container"></div>
+
+          <article id="diagram">
+            <div className="container">
+              <header>
+                <ProjectTitle
+                  title={this.state.projectTitle}
+                  updateProjectTitle={this.updateProjectTitle}
                 />
-              ))}
+              </header>
+
+              <div id="canvas">
+                {rootSymbolCount > 0 && (
+                  <div className="Symbols">
+                    {this.getSymbols(0).map(symbol => (
+                      <Symbol
+                        key={symbol.id}
+                        getSymbols={this.getSymbols}
+                        symbol={symbol}
+                        removeSymbol={this.removeSymbol}
+                        editSymbol={this.editSymbol}
+                        moveSymbol={this.moveSymbol}
+                      />
+                    ))}
+                  </div>
+                )}
+                {rootSymbolCount === 0 && (
+                  <div className="Symbols--empty">
+                    <p onClick={() => this.addSymbol()}>
+                      Füge ein Symbol hinzu um zu beginnen.
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-          {rootSymbolCount === 0 && (
-            <div className="Symbols--empty">
-              <p onClick={() => this.addSymbol()}>
-                Füge ein Symbol hinzu um zu beginnen.
-              </p>
-            </div>
-          )}
-        </div>
-        <div className="container">
-          <AddModal
-            toggleModal={() =>
-              this.setState({ toggleAddModal: !this.state.toggleAddModal })
-            }
-            active={this.state.toggleAddModal}
-            symbol={SYMBOL_TEMPLATE}
-            createSymbol={this.createSymbol}
-          />
-        </div>
-        <div className="container">
-          {this.state.toggleEditModal && (
-            <EditModal
+          </article>
+
+          <aside id="control">
+            <AddModal
               toggleModal={() =>
-                this.setState({ toggleEditModal: !this.state.toggleEditModal })
+                this.setState({ toggleAddModal: !this.state.toggleAddModal })
               }
-              active={this.state.toggleEditModal}
-              symbol={this.state.symbolToEdit}
-              editSymbol={this.updateSymbol}
+              active={this.state.toggleAddModal}
+              symbol={SYMBOL_TEMPLATE}
+              createSymbol={this.createSymbol}
             />
-          )}
+
+            {this.state.toggleEditModal && (
+              <EditModal
+                toggleModal={() =>
+                  this.setState({
+                    toggleEditModal: !this.state.toggleEditModal,
+                  })
+                }
+                active={this.state.toggleEditModal}
+                symbol={this.state.symbolToEdit}
+                editSymbol={this.updateSymbol}
+              />
+            )}
+          </aside>
         </div>
       </div>
     );
