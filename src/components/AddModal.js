@@ -13,7 +13,7 @@ const AddModal = ({ active, toggleModal, symbol, createSymbol }) => {
 
   return (
     <div className="AddModal">
-      <h4>Symbol hinzufügen</h4>
+      <h3>Symbol hinzufügen</h3>
       <button className="AddModal__toggle-button" onClick={toggleModal}>
         x
       </button>
