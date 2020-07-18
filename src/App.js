@@ -254,6 +254,7 @@ class App extends Component {
                 <span role="img" aria-label="Rückgängig">
                   <UndoIcon />
                 </span>
+                <span>Rückgängig</span>
               </button>
               <button
                 onClick={() => this.redo()}
@@ -261,6 +262,7 @@ class App extends Component {
                 <span role="img" aria-label="Wiederholen">
                   <RedoIcon />
                 </span>
+                <span>Wiederholen</span>
               </button>
               <button
                 disabled={
@@ -268,9 +270,10 @@ class App extends Component {
                   this.state.redoStack.length === 0
                 }
                 onClick={() => this.saveState(true)}>
-                <span role="img" aria-label="Projektdatei speichern">
+                <span role="img" aria-label="Projekt speichern">
                   <SaveIcon />
                 </span>
+                <span>Projekt speichern</span>
               </button>
               <input
                 type="file"
@@ -287,6 +290,7 @@ class App extends Component {
                 <span role="img" aria-label="Projektdatei öffnen">
                   <FolderOpenIcon />
                 </span>
+                <span>Öffnen</span>
               </button>
               <button
                 disabled={this.state === INITIAL_STATE}
@@ -294,6 +298,7 @@ class App extends Component {
                 <span role="img" aria-label="Projekt löschen">
                   <DeleteForeverIcon />
                 </span>
+                <span>Löschen</span>
               </button>
             </div>
           </div>
