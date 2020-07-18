@@ -25,8 +25,7 @@ const SymbolForm = ({ submitLabel, submitHandler, symbol }) => {
         e.preventDefault();
         submitHandler({ ...symbol, id: id, title: title, type: type });
         e.target.reset();
-      }}
-    >
+      }}>
       <label htmlFor="title">Titel</label>
       <input
         id="title"
@@ -36,7 +35,7 @@ const SymbolForm = ({ submitLabel, submitHandler, symbol }) => {
           setTitle(e.target.value);
           setChanges(true);
         }}
-        placeholder="Gib den neuen Titel des Symbols ein"
+        placeholder="Titel des Symbols"
         required
       />
       <label htmlFor="type">Typ</label>
@@ -47,8 +46,7 @@ const SymbolForm = ({ submitLabel, submitHandler, symbol }) => {
           setType(e.target.value);
           setChanges(true);
         }}
-        required
-      >
+        required>
         <option value="Process">Prozess</option>
         <option value="TestFirstLoop">Kopfgesteuerte Schleife</option>
         <option value="TestLastLoop">Fußgesteuerte Schleife</option>
