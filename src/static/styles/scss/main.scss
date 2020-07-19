@@ -110,6 +110,28 @@ h1 {
   padding: var(--gap);
 }
 
+.ProjectTitle {
+  h2,
+  input {
+    font-family: "Roboto";
+    font-size: 27px;
+    vertical-align: center;
+  }
+
+  h2 {
+    line-height: 36px;
+  }
+
+  input {
+    padding-left: 0;
+    width: max-content;
+  }
+}
+
+.ProjectTitle_text {
+  vertical-align: center;
+}
+
 #canvas {
   flex: 1;
   padding-bottom: 25vh;

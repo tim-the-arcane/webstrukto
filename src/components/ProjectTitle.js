@@ -18,13 +18,13 @@ const ProjectTitle = props => {
               display: "flex",
               alignItem: "center",
               paddingBlock: "10px",
-            }}
-          >
+            }}>
             {title}
             <button
               className="ProjectTitle__button--edit"
-              onClick={() => toggleModal(!showModal)}
-            >
+              onClick={() => {
+                toggleModal(!showModal);
+              }}>
               <span role="img" aria-label={`Projekt umbenennen'`}>
                 🖋️
               </span>
@@ -44,9 +44,9 @@ const ProjectTitle = props => {
             display: "flex",
             alignItem: "center",
             paddingBlock: "10px",
-          }}
-        >
+          }}>
           <input
+            autoFocus={true}
             type="text"
             value={title}
             onChange={e => setTitle(e.target.value)}
