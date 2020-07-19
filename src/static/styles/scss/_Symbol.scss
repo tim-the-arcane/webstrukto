@@ -22,11 +22,60 @@
 
 .Symbol__button {
   font-size: 0.5em;
-  width: 20px;
-  height: 20px;
+  width: 1.5rem;
+  height: 1.5rem;
   margin: 0;
   padding: 0;
   border: 1px whitesmoke solid;
+
+  span[role="img"] {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+
+    svg {
+      height: 100%;
+      width: 100%;
+      transition: 0.05s ease-out;
+
+      path:first-child {
+        opacity: 1;
+      }
+    }
+  }
+
+  &:hover svg path:first-child {
+    fill: #ff8f00;
+  }
+
+  &--delete,
+  &--edit {
+    svg path:first-child {
+      fill: whitesmoke;
+    }
+  }
+
+  &--move-up:hover svg {
+    transform: translateY(-3px);
+  }
+
+  &--move-down:hover svg {
+    transform: translateY(3px);
+  }
+
+  &--edit:hover svg {
+    transform: rotate(10deg);
+  }
+
+  &--delete:hover {
+    svg path:first-child {
+      fill: #dd2323;
+    }
+
+    svg path:last-child {
+      transform: translateY(-1px);
+    }
+  }
 }
 
 .Symbol__children {
