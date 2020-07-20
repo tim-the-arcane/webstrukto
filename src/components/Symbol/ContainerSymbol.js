@@ -1,6 +1,9 @@
 import React from "react";
 import AddTwoTone from "@material-ui/icons/AddTwoTone";
 
+import SymbolPlaceholder from "./_SymbolPlaceholder";
+import Blank from "./_SymbolBlank";
+
 const ContainerSymbol = props => {
   return (
     <div
@@ -11,17 +14,28 @@ const ContainerSymbol = props => {
           : {}
       }>
       {props.children}
-      <button
-        onClick={() => props.addSymbol(props.symbol.id)}
-        title="Untersymbol hinzufügen"
-        className="ContainerSymbol__addSymbol">
-        <span role="img" style={{ display: "flex" }}>
-          <AddTwoTone
-            onClick={() => props.addSymbol(props.symbol.id)}
-            style={{ flex: 1, fontSize: "15px" }}
-          />
-        </span>
-      </button>
+
+      {props.children.length === 0 && props.symbolToFill !== props.symbol.id && (
+        <div onClick={() => props.addSymbol(props.symbol.id)}>
+          <Blank />
+        </div>
+      )}
+
+      {props.symbolToFill === props.symbol.id && <SymbolPlaceholder />}
+
+      {props.symbolToFill !== props.symbol.id && (
+        <button
+          onClick={() => props.addSymbol(props.symbol.id)}
+          title="Untersymbol hinzufügen"
+          className="ContainerSymbol__addSymbol">
+          <span role="img" style={{ display: "flex" }}>
+            <AddTwoTone
+              onClick={() => props.addSymbol(props.symbol.id)}
+              style={{ flex: 1, fontSize: "15px" }}
+            />
+          </span>
+        </button>
+      )}
     </div>
   );
 };
