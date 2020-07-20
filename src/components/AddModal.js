@@ -1,6 +1,7 @@
 import React from "react";
 
 import SymbolForm from "./_SymbolForm";
+import { ArrowLeftTwoTone } from "@material-ui/icons";
 
 const AddModal = ({
   active,
@@ -8,6 +9,7 @@ const AddModal = ({
   symbol,
   createSymbol,
   symbolToFill,
+  resetParentSymbol,
 }) => {
   if (!active) {
     return (
@@ -21,7 +23,17 @@ const AddModal = ({
 
   return (
     <div className="AddModal">
-      <h3>Symbol hinzufügen</h3>
+      <h3>
+        {symbolToFill === 0 ? "Symbol hinzufügen" : "Untersymbol hinzufügen"}
+      </h3>
+      {symbolToFill !== 0 && (
+        <button class="resetParentSymbol" onClick={() => resetParentSymbol()}>
+          <span role="img">
+            <ArrowLeftTwoTone />
+          </span>
+          reset
+        </button>
+      )}
       <button className="AddModal__toggle-button" onClick={toggleModal}>
         x
       </button>

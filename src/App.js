@@ -31,7 +31,7 @@ const INITIAL_STATE = {
     title: "",
     type: "Process",
   },
-  symbolToFill: "",
+  symbolToFill: 0,
 };
 
 let localStorageContent = JSON.parse(localStorage.getItem("saveState"));
@@ -165,7 +165,7 @@ class App extends Component {
         {
           ...symbol,
           id: uuid(),
-          parentSymbol: symbol.parentSymbol || 0,
+          parentSymbol: symbol.parentSymbol,
         },
       ],
     });
@@ -328,6 +328,7 @@ class App extends Component {
                         editSymbol={this.editSymbol}
                         moveSymbol={this.moveSymbol}
                         removeSymbol={this.removeSymbol}
+                        symbolToFill={this.state.symbolToFill}
                       />
                     ))}
                   </div>
@@ -352,6 +353,9 @@ class App extends Component {
               symbol={SYMBOL_TEMPLATE}
               createSymbol={this.createSymbol}
               symbolToFill={this.state.symbolToFill}
+              resetParentSymbol={() => {
+                this.setState({ symbolToFill: 0 });
+              }}
             />
 
             {this.state.toggleEditModal && (
