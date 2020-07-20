@@ -200,7 +200,6 @@
     text-align: center;
     font-style: italic;
     color: opacify(#ff8f00, 0.5);
-    font-size: 0.8em;
     text-transform: uppercase;
   }
 
@@ -217,4 +216,9 @@
       opacity: 1;
     }
   }
+}
+
+.Symbol--blank {
+  color: #3b3b3b;
+  background: #dbdbdb;
 }
