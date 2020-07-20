@@ -229,7 +229,7 @@ class App extends Component {
       //
     }
 
-    this.setState({
+    this.setSymbolState({
       symbols: arrayMove(this.state.symbols, from, to),
     });
   };
