@@ -9,6 +9,7 @@ const ProcessSymbol = props => {
         <span className="Symbol__title">{props.symbol.title}</span>
         <SymbolButtons
           symbol={props.symbol}
+          addSymbol={props.addSymbol}
           editSymbol={props.editSymbol}
           moveSymbol={props.moveSymbol}
           removeSymbol={props.removeSymbol}

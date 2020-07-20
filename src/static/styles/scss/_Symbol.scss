@@ -48,6 +48,16 @@
     fill: #ff8f00;
   }
 
+  &--add-child svg path {
+    transition: 0.2s ease-in-out;
+    transform-origin: center center;
+  }
+
+  &--add-child:hover svg path:first-child {
+    fill: green;
+    transform: rotate(90deg);
+  }
+
   &--delete,
   &--edit {
     svg path:first-child {

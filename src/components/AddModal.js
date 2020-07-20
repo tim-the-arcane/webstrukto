@@ -2,7 +2,13 @@ import React from "react";
 
 import SymbolForm from "./_SymbolForm";
 
-const AddModal = ({ active, toggleModal, symbol, createSymbol }) => {
+const AddModal = ({
+  active,
+  toggleModal,
+  symbol,
+  createSymbol,
+  symbolToFill,
+}) => {
   if (!active) {
     return (
       <div className="AddModal" onClick={toggleModal}>
@@ -10,6 +16,8 @@ const AddModal = ({ active, toggleModal, symbol, createSymbol }) => {
       </div>
     );
   }
+
+  symbol = { ...symbol, parentSymbol: symbolToFill };
 
   return (
     <div className="AddModal">
@@ -21,6 +29,7 @@ const AddModal = ({ active, toggleModal, symbol, createSymbol }) => {
         symbol={symbol}
         submitLabel={"Erstellen"}
         submitHandler={createSymbol}
+        symbolToFill={symbolToFill}
       />
     </div>
   );

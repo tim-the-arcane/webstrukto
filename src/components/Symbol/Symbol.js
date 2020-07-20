@@ -10,6 +10,7 @@ const SYMBOL_TYPE_TEST_LAST_LOOP = "TestLastLoop";
 
 const Symbol = ({
   symbol,
+  addSymbol,
   getSymbols,
   editSymbol,
   moveSymbol,
@@ -39,18 +40,19 @@ const Symbol = ({
   return (
     <Component
       symbol={symbol}
-      removeSymbol={removeSymbol}
-      moveSymbol={moveSymbol}
+      addSymbol={addSymbol}
       editSymbol={editSymbol}
-    >
+      moveSymbol={moveSymbol}
+      removeSymbol={removeSymbol}>
       {symbols.map(child => (
         <Symbol
           key={child.id}
           symbol={child}
+          addSymbol={addSymbol}
+          getSymbols={getSymbols}
+          editSymbol={editSymbol}
           moveSymbol={moveSymbol}
           removeSymbol={removeSymbol}
-          editSymbol={editSymbol}
-          getSymbols={getSymbols}
         />
       ))}
     </Component>

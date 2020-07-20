@@ -31,6 +31,7 @@ const INITIAL_STATE = {
     title: "",
     type: "Process",
   },
+  symbolToFill: "",
 };
 
 let localStorageContent = JSON.parse(localStorage.getItem("saveState"));
@@ -164,7 +165,7 @@ class App extends Component {
         {
           ...symbol,
           id: uuid(),
-          parentSymbol: 0,
+          parentSymbol: symbol.parentSymbol || 0,
         },
       ],
     });
@@ -198,10 +199,11 @@ class App extends Component {
     });
   };
 
-  addSymbol = () => {
+  addSymbol = (parent = false) => {
     this.setState({
       toggleEditModal: false,
       toggleAddModal: true,
+      symbolToFill: parent,
     });
   };
 
@@ -320,19 +322,20 @@ class App extends Component {
                     {this.getSymbols(0).map(symbol => (
                       <Symbol
                         key={symbol.id}
-                        getSymbols={this.getSymbols}
                         symbol={symbol}
-                        removeSymbol={this.removeSymbol}
+                        addSymbol={this.addSymbol}
+                        getSymbols={this.getSymbols}
                         editSymbol={this.editSymbol}
                         moveSymbol={this.moveSymbol}
+                        removeSymbol={this.removeSymbol}
                       />
                     ))}
                   </div>
                 )}
                 {rootSymbolCount === 0 && (
                   <div className="Symbols--empty">
-                    <p onClick={() => this.addSymbol()}>
-                      Füge ein Symbol hinzu um zu beginnen.
+                    <p onClick={() => this.addSymbol(false)}>
+                      Füge ein Symbol hinzu, um zu beginnen.
                     </p>
                   </div>
                 )}
@@ -348,6 +351,7 @@ class App extends Component {
               active={this.state.toggleAddModal}
               symbol={SYMBOL_TEMPLATE}
               createSymbol={this.createSymbol}
+              symbolToFill={this.state.symbolToFill}
             />
 
             {this.state.toggleEditModal && (
