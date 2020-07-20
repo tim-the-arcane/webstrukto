@@ -112,10 +112,6 @@
   }
 }
 
-.Symbol .Symbol[class$="Loop"]:first-child {
-  border-top: 0;
-}
-
 .Symbol--Decision {
   .Symbol__header {
     display: grid;
@@ -195,6 +191,30 @@
   &:hover {
     button {
       display: flex;
+    }
+  }
+}
+
+.Symbol--Placeholder {
+  .Symbol__header {
+    text-align: center;
+    font-style: italic;
+    color: opacify(#ff8f00, 0.5);
+    font-size: 0.8em;
+    text-transform: uppercase;
+  }
+
+  span {
+    animation: pulseText 0.5s alternate ease-in-out infinite;
+  }
+
+  @keyframes pulseText {
+    from {
+      opacity: 0.6;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 }
