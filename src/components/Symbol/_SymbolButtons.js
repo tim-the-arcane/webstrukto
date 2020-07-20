@@ -17,15 +17,17 @@ const SymbolButtons = ({
 }) => {
   return (
     <div className="Symbol__buttons">
-      <button
-        className="Symbol__button Symbol__button--add-child"
-        onClick={() => addSymbol(symbol.id)}>
-        <span
-          role="img"
-          aria-label={`Sub-Symbol zu '${symbol.title} hinzufügen'`}>
-          <AddTwoTone />
-        </span>
-      </button>
+      {addSymbol && (
+        <button
+          className="Symbol__button Symbol__button--add-child"
+          onClick={() => addSymbol(symbol.id)}>
+          <span
+            role="img"
+            aria-label={`Sub-Symbol zu '${symbol.title} hinzufügen'`}>
+            <AddTwoTone />
+          </span>
+        </button>
+      )}
       <button
         className="Symbol__button Symbol__button--move-up"
         onClick={() => moveSymbol(symbol.id, "UP")}>
