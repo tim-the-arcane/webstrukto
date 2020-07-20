@@ -309,12 +309,10 @@ class App extends Component {
         <div className="wrapper">
           <article id="diagram">
             <div className="container">
-              <header>
-                <ProjectTitle
-                  title={this.state.projectTitle}
-                  updateProjectTitle={this.updateProjectTitle}
-                />
-              </header>
+              <ProjectTitle
+                title={this.state.projectTitle}
+                updateProjectTitle={this.updateProjectTitle}
+              />
 
               <div id="canvas">
                 {rootSymbolCount > 0 && (
