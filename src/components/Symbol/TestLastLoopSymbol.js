@@ -4,7 +4,13 @@ import SymbolButtons from "./_SymbolButtons";
 
 const TestFirstLoop = props => {
   return (
-    <div className={"Symbol Symbol--" + props.symbol.type}>
+    <div
+      className={"Symbol Symbol--" + props.symbol.type}
+      style={
+        props.symbolToFill === props.symbol.id
+          ? { outline: "rgba(255, 143, 0, .6) solid 5px" }
+          : {}
+      }>
       <div className="Symbol__header">
         <span className="Symbol__title">{props.symbol.title}</span>
         <SymbolButtons

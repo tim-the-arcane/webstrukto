@@ -15,6 +15,7 @@ const Symbol = ({
   editSymbol,
   moveSymbol,
   removeSymbol,
+  symbolToFill,
 }) => {
   const symbols = getSymbols(symbol.id);
 
@@ -43,7 +44,8 @@ const Symbol = ({
       addSymbol={addSymbol}
       editSymbol={editSymbol}
       moveSymbol={moveSymbol}
-      removeSymbol={removeSymbol}>
+      removeSymbol={removeSymbol}
+      symbolToFill={symbolToFill}>
       {symbols.map(child => (
         <Symbol
           key={child.id}
@@ -53,6 +55,7 @@ const Symbol = ({
           editSymbol={editSymbol}
           moveSymbol={moveSymbol}
           removeSymbol={removeSymbol}
+          symbolToFill={symbolToFill}
         />
       ))}
     </Component>
