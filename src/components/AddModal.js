@@ -27,7 +27,9 @@ const AddModal = ({
         {symbolToFill === 0 ? "Symbol hinzufügen" : "Untersymbol hinzufügen"}
       </h3>
       {symbolToFill !== 0 && (
-        <button class="resetParentSymbol" onClick={() => resetParentSymbol()}>
+        <button
+          className="resetParentSymbol"
+          onClick={() => resetParentSymbol()}>
           <span role="img">
             <ArrowLeftTwoTone stroke="5" />
           </span>
