@@ -319,4 +319,39 @@ h1 {
   }
 }
 
+@media print {
+  * {
+    outline: 0 !important;
+  }
+
+  #masthead,
+  #control,
+  #forkMe {
+    display: none;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  #diagram {
+    width: max-content;
+    height: auto;
+
+    button {
+      display: none;
+    }
+  }
+
+  .Symbols {
+    box-shadow: none;
+  }
+
+  .Symbol--Placeholder {
+    display: none;
+  }
+}
+
 @import "utilities";
