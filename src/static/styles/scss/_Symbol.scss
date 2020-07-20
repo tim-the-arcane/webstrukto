@@ -167,3 +167,30 @@
     position: absolute;
   }
 }
+
+.ContainerSymbol {
+  position: relative;
+
+  > button {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: calc(50% - 1.5rem);
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0 !important;
+    border: 0;
+    background: none;
+
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &:hover {
+    button {
+      display: flex;
+    }
+  }
+}
