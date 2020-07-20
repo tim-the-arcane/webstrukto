@@ -29,9 +29,9 @@ const AddModal = ({
       {symbolToFill !== 0 && (
         <button class="resetParentSymbol" onClick={() => resetParentSymbol()}>
           <span role="img">
-            <ArrowLeftTwoTone />
+            <ArrowLeftTwoTone stroke="5" />
           </span>
-          reset
+          zurücksetzen
         </button>
       )}
       <button className="AddModal__toggle-button" onClick={toggleModal}>
