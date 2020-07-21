@@ -168,16 +168,17 @@ class App extends Component {
       case "TestFirstLoop":
       case "TestLastLoop":
         containers.push(...this.createContainer(symbolId, 1));
-
         break;
 
       case "Branch":
         containers.push(...this.createContainer(symbolId, 2));
+        break;
 
+      case "Switch":
+        containers.push(...this.createContainer(symbolId, 4));
         break;
 
       /**
-       * @Todo Add logic for switch case symbol
        * @Todo Add logic for procedure/method symbol
        */
 

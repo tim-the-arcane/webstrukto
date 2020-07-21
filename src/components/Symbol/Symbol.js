@@ -5,12 +5,14 @@ import TestFirstLoopSymbol from "./TestFirstLoopSymbol";
 import TestLastLoopSymbol from "./TestLastLoopSymbol";
 import ContainerSymbol from "./ContainerSymbol";
 import BranchSymbol from "./BranchSymbol";
+import SwitchSymbol from "./SwitchSymbol";
 
 const SYMBOL_TYPE_PROCESS = "Process";
 const SYMBOL_TYPE_TEST_FIRST_LOOP = "TestFirstLoop";
 const SYMBOL_TYPE_TEST_LAST_LOOP = "TestLastLoop";
 const SYMBOL_TYPE_CONTAINER = "Container";
 const SYMBOL_TYPE_BRANCH = "Branch";
+const SYMBOL_TYPE_SWITCH = "Switch";
 
 const Symbol = ({
   symbol,
@@ -44,6 +46,10 @@ const Symbol = ({
 
     case SYMBOL_TYPE_BRANCH:
       Component = BranchSymbol;
+      break;
+
+    case SYMBOL_TYPE_SWITCH:
+      Component = SwitchSymbol;
       break;
 
     default:

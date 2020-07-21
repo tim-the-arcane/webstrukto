@@ -56,6 +56,7 @@ const SymbolForm = ({
         <option value="TestFirstLoop">Kopfgesteuerte Schleife</option>
         <option value="TestLastLoop">Fußgesteuerte Schleife</option>
         <option value="Branch">If-Else-Abzweigung</option>
+        <option value="Switch">Switch-Case-Abzweigung</option>
       </select>
       <div className="SymbolForm__buttons">
         <button type="submit">{submitLabel}</button>
