@@ -7,7 +7,9 @@ const _SymbolBlank = props => {
       onClick={() => props.addSymbol(props.parentSymbolId)}>
       <div className="Symbol__header">
         <span className="Symbol__title">
-          Hier kannst du ein Symbol einfügen...
+          {props.parentSymbolId === 0
+            ? "Symbol hier einfügen"
+            : "Untersymbol hier einfügen"}
         </span>
       </div>
     </div>

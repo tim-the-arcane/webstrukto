@@ -184,6 +184,8 @@
 
 .ContainerSymbol {
   position: relative;
+  display: flex;
+  flex-direction: column;
 
   > button {
     display: none;
@@ -211,6 +213,8 @@
 
 .Symbol--Placeholder {
   height: max-content;
+  outline: rgba(255, 143, 0, 0.6) solid 5px;
+  z-index: 9999;
 
   .Symbol__header {
     text-align: center;
@@ -235,7 +239,7 @@
 }
 
 .Symbol--blank {
-  height: 100%;
+  flex: 1;
   color: #3b3b3b;
   background: #dbdbdb;
 }

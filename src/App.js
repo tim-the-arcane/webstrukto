@@ -13,6 +13,7 @@ import ProjectTitle from "./components/ProjectTitle";
 import Symbol from "./components/Symbol";
 import EditModal from "./components/EditModal";
 import AddModal from "./components/AddModal";
+import ContainerSymbol from "./components/Symbol/ContainerSymbol";
 
 const SYMBOL_TEMPLATE = {
   title: "",
@@ -368,6 +369,12 @@ class App extends Component {
                         symbolToFill={this.state.symbolToFill}
                       />
                     ))}
+
+                    <ContainerSymbol
+                      symbol={{ id: 0 }}
+                      addSymbol={this.addSymbol}
+                      symbolToFill={this.state.symbolToFill}
+                    />
                   </div>
                 )}
                 {rootSymbolCount === 0 && (
