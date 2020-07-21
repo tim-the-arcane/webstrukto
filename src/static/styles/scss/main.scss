@@ -352,6 +352,15 @@ h1 {
   .Symbol--Placeholder {
     display: none;
   }
+
+  .Symbol--blank {
+    background: white;
+    border-top: 1px solid black;
+
+    * {
+      opacity: 0;
+    }
+  }
 }
 
 @import "utilities";
