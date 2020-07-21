@@ -159,16 +159,53 @@ class App extends Component {
   };
 
   createSymbol = symbol => {
+    let symbolId = uuid();
+    let newSymbols = [];
+    let containers = [];
+    newSymbols.push({ ...symbol, id: symbolId });
+
+    switch (symbol.type) {
+      case "TestFirstLoop":
+      case "TestLastLoop":
+        containers.push(...this.createContainer(symbolId, 1));
+
+        break;
+
+      case "Branch":
+        containers.push(...this.createContainer(symbolId, 2));
+
+        break;
+
+      /**
+       * @Todo Add logic for switch case symbol
+       * @Todo Add logic for procedure/method symbol
+       */
+
+      default:
+        break;
+    }
+
+    newSymbols.push(...containers);
+    console.log(newSymbols);
+
     this.setSymbolState({
-      symbols: [
-        ...this.state.symbols,
-        {
-          ...symbol,
-          id: uuid(),
-          parentSymbol: symbol.parentSymbol,
-        },
-      ],
+      symbols: [...this.state.symbols, ...newSymbols],
     });
+  };
+
+  createContainer = (parentSymbolId, count) => {
+    let containers = [];
+
+    for (let i = 0; i < count; i++) {
+      containers.push({
+        title: "",
+        type: "Container",
+        id: uuid(),
+        parentSymbol: parentSymbolId,
+      });
+    }
+
+    return containers;
   };
 
   getSymbols = parentSymbolId => {
