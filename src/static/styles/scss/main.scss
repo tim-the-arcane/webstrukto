@@ -354,12 +354,17 @@ h1 {
   }
 
   .Symbol--blank {
+    display: none;
     background: white;
     border-top: 1px solid black;
 
     * {
       opacity: 0;
     }
+  }
+
+  .Symbol--Branch > .Symbol--Container > .Symbol--Placeholder {
+    display: inherit;
   }
 }
 
