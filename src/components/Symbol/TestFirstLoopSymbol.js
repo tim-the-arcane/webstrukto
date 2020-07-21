@@ -1,8 +1,6 @@
 import React from "react";
 
 import SymbolButtons from "./_SymbolButtons";
-import SymbolPlaceholder from "./_SymbolPlaceholder";
-import Blank from "./_SymbolBlank";
 
 const TestFirstLoop = props => {
   return (
@@ -24,17 +22,7 @@ const TestFirstLoop = props => {
         />
       </div>
 
-      <div className={"Symbol__children"}>
-        {props.children}
-
-        {props.children.length === 0 && props.symbolToFill !== props.symbol.id && (
-          <div onClick={() => props.addSymbol(props.symbol.id)}>
-            <Blank />
-          </div>
-        )}
-
-        {props.symbolToFill === props.symbol.id && <SymbolPlaceholder />}
-      </div>
+      <div className={"Symbol__children"}>{props.children}</div>
     </div>
   );
 };
