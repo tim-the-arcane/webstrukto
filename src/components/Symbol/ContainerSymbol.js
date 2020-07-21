@@ -15,11 +15,10 @@ const ContainerSymbol = props => {
       }>
       {props.children}
 
-      {props.children.length === 0 && props.symbolToFill !== props.symbol.id && (
-        <div onClick={() => props.addSymbol(props.symbol.id)}>
-          <Blank />
-        </div>
-      )}
+      {props.children.length === 0 &&
+        props.symbolToFill !== props.symbol.id && (
+          <Blank addSymbol={props.addSymbol} parentSymbolId={props.symbol.id} />
+        )}
 
       {props.symbolToFill === props.symbol.id && <SymbolPlaceholder />}
 
