@@ -112,59 +112,73 @@
   }
 }
 
-.Symbol--Decision {
-  .Symbol__header {
+.Symbol--Branch {
+  & > .Symbol__header {
     display: grid;
     min-height: 101px;
     position: relative;
     grid-template-rows: 1.5rem 1fr;
     grid-template-columns: auto 1fr auto;
 
-    .Symbol__text {
+    &::before {
+      content: "true";
+      position: absolute;
+      bottom: var(--gap);
+      left: var(--gap);
+    }
+
+    &::after {
+      content: "false";
+      position: absolute;
+      bottom: var(--gap);
+      right: var(--gap);
+    }
+
+    & > .Symbol__title {
       text-align: center;
-      position: relative;
       grid-column: 2 / 3;
       grid-row: 1 / 2;
     }
   }
 
-  .Symbol--Decision__blocks {
+  & > .Symbol__children {
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .decisionIf {
-    padding: 0.5rem;
-    margin-top: auto;
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-  }
-
-  .decisionElse {
-    padding: 0.5rem;
-    margin-top: auto;
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-  }
-
-  .Symbol__children {
+    grid-template-rows: 1fr;
+    grid-template-areas: "left right";
     margin: 0 auto;
     width: 100%;
-    border: none;
-  }
+    border-width: 0 0 1px 0;
 
-  .Symbol__children:first-child {
-    border-right: 1px solid black;
-  }
+    & > .ContainerSymbol {
+      &:first-child {
+        grid-area: left;
+      }
 
-  .Symbol__children:last-child {
+      &:last-child {
+        border-left: 1px solid black;
+        grid-area: right;
+      }
+    }
   }
 
   .svg-wrapper {
-    width: 100%;
-    height: 0;
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    svg {
+      width: 100%;
+      height: 100%;
+
+      line {
+        stroke: black;
+        stroke-width: 1px;
+      }
+    }
   }
 }
 
@@ -196,6 +210,8 @@
 }
 
 .Symbol--Placeholder {
+  height: max-content;
+
   .Symbol__header {
     text-align: center;
     font-style: italic;
@@ -219,6 +235,7 @@
 }
 
 .Symbol--blank {
+  height: 100%;
   color: #3b3b3b;
   background: #dbdbdb;
 }
