@@ -8,6 +8,7 @@ import RedoIcon from "@material-ui/icons/RedoRounded";
 import SaveIcon from "@material-ui/icons/SaveRounded";
 import FolderOpenIcon from "@material-ui/icons/FolderOpenRounded";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForeverRounded";
+import Print from "@material-ui/icons/Print";
 
 import ProjectTitle from "./components/ProjectTitle";
 import Symbol from "./components/Symbol";
@@ -330,17 +331,26 @@ class App extends Component {
                 <span role="img" aria-label="Projektdatei öffnen">
                   <FolderOpenIcon />
                 </span>
-                <span>Öffnen</span>
+                <span>Projekt öffnen</span>
               </button>
               <button
-                disabled={this.state === INITIAL_STATE}
+                disabled={
+                  this.state.symbols === INITIAL_STATE.symbols &&
+                  this.state.projectTitle === "Neues Struktogramm"
+                }
                 onClick={() => {
                   if (window.confirm("Wirklich löschen?")) this.clearState();
                 }}>
                 <span role="img" aria-label="Projekt löschen">
                   <DeleteForeverIcon />
                 </span>
-                <span>Löschen</span>
+                <span>Projekt löschen</span>
+              </button>
+              <button onClick={() => window.print()}>
+                <span role="img" aria-label="Ausdrucken">
+                  <Print />
+                </span>
+                <span>Drucken</span>
               </button>
             </div>
           </div>
