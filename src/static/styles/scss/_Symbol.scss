@@ -243,4 +243,8 @@
   flex: 1;
   color: #3b3b3b;
   background: #dbdbdb;
+
+  &:hover {
+    opacity: 0.6;
+  }
 }
