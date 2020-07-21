@@ -26,7 +26,6 @@ const INITIAL_STATE = {
   symbols: [],
   undoStack: [],
   redoStack: [],
-  toggleAddModal: true,
   toggleEditModal: false,
   symbolToEdit: {
     title: "",
@@ -226,6 +225,7 @@ class App extends Component {
       }),
       toggleEditModal: false,
       symbolToEdit: {},
+      symbolToFill: 0,
     });
   };
 
@@ -240,7 +240,6 @@ class App extends Component {
   addSymbol = (parent = false) => {
     this.setState({
       toggleEditModal: false,
-      toggleAddModal: true,
       symbolToFill: parent,
     });
   };
@@ -248,7 +247,7 @@ class App extends Component {
   editSymbol = symbol => {
     this.setState({
       symbolToEdit: symbol,
-      toggleAddModal: false,
+      symbolToFill: null,
       toggleEditModal: true,
     });
   };
@@ -370,11 +369,13 @@ class App extends Component {
                       />
                     ))}
 
-                    <ContainerSymbol
-                      symbol={{ id: 0 }}
-                      addSymbol={this.addSymbol}
-                      symbolToFill={this.state.symbolToFill}
-                    />
+                    {!this.state.toggleEditModal && (
+                      <ContainerSymbol
+                        symbol={{ id: 0 }}
+                        addSymbol={this.addSymbol}
+                        symbolToFill={this.state.symbolToFill}
+                      />
+                    )}
                   </div>
                 )}
                 {rootSymbolCount === 0 && (
@@ -389,18 +390,20 @@ class App extends Component {
           </article>
 
           <aside id="control">
-            <AddModal
-              toggleModal={() =>
-                this.setState({ toggleAddModal: !this.state.toggleAddModal })
-              }
-              active={this.state.toggleAddModal}
-              symbol={SYMBOL_TEMPLATE}
-              createSymbol={this.createSymbol}
-              symbolToFill={this.state.symbolToFill}
-              resetParentSymbol={() => {
-                this.setState({ symbolToFill: 0 });
-              }}
-            />
+            {!this.state.toggleEditModal && (
+              <AddModal
+                toggleModal={() =>
+                  this.setState({ toggleAddModal: !this.state.toggleAddModal })
+                }
+                active={this.state.toggleAddModal}
+                symbol={SYMBOL_TEMPLATE}
+                createSymbol={this.createSymbol}
+                symbolToFill={this.state.symbolToFill}
+                resetParentSymbol={() => {
+                  this.setState({ symbolToFill: 0 });
+                }}
+              />
+            )}
 
             {this.state.toggleEditModal && (
               <EditModal
