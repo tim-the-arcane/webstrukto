@@ -296,7 +296,9 @@ class App extends Component {
               </button>
               <button
                 disabled={this.state === INITIAL_STATE}
-                onClick={() => this.clearState()}>
+                onClick={() => {
+                  if (window.confirm("Wirklich löschen?")) this.clearState();
+                }}>
                 <span role="img" aria-label="Projekt löschen">
                   <DeleteForeverIcon />
                 </span>
