@@ -5,28 +5,11 @@ import {
   ArrowDownwardTwoTone,
   ArrowUpwardTwoTone,
   EditTwoTone,
-  AddTwoTone,
 } from "@material-ui/icons";
 
-const SymbolButtons = ({
-  symbol,
-  editSymbol,
-  moveSymbol,
-  removeSymbol,
-  addSymbol,
-}) => {
+const SymbolButtons = ({ symbol, editSymbol, moveSymbol, removeSymbol }) => {
   return (
     <div className="Symbol__buttons">
-      {addSymbol && (
-        <button
-          className="Symbol__button Symbol__button--add-child"
-          onClick={() => addSymbol(symbol.id)}
-          title={`Sub-Symbol zu '${symbol.title} hinzufügen'`}>
-          <span role="img">
-            <AddTwoTone />
-          </span>
-        </button>
-      )}
       <button
         className="Symbol__button Symbol__button--move-up"
         onClick={() => moveSymbol(symbol.id, "UP")}
